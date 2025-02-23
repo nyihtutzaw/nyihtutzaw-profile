@@ -16,7 +16,7 @@ const BlogSection = () => {
         // Extract image from content if available
         const postsWithImages = data.items.map((post: any) => ({
           ...post,
-          image: post.content?.match(/<img[^>]+src="([^">]+)"/)?.[1] || '/blog-placeholder.jpg'
+          image: post.content?.match(/<img[^>]+src="([^">]+)"/)?.[1] || '/placeholder.jpg'
         }));
         setPosts(postsWithImages || []);
       } catch (error) {
