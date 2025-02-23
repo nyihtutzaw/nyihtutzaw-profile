@@ -40,7 +40,7 @@ const BlogSection = () => {
             rel="noopener noreferrer"
             className="text-blue-600 dark:text-blue-400 hover:underline"
           >
-            View Medium →
+            View All →
           </a>
         </div>
 
@@ -50,7 +50,7 @@ const BlogSection = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-            {posts.slice(0, posts.length).map((post) => (
+            {posts.slice(0, 4).map((post) => (
               <a
                 key={post.link}
                 href={post.link}

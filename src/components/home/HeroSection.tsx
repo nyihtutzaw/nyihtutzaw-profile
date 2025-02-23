@@ -3,7 +3,7 @@ const HeroSection = () => (
     <div className="flex flex-col items-center">
       <div className="w-48 h-48 md:w-64 md:h-64 relative mb-4">
         <img
-          src="/profile-photo.jpg"
+          src="/profile.png"
           alt="Profile"
           className="rounded-full object-cover w-full h-full border-4 border-blue-500 shadow-lg"
         />
@@ -20,7 +20,7 @@ const HeroSection = () => (
           </svg>
         </a>
         <a
-          href="https://linkedin.com/in/your-profile"
+          href="https://www.linkedin.com/in/nyi-htut-zaw-9b741115a/"
           target="_blank"
           rel="noopener noreferrer"
           className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
@@ -31,7 +31,7 @@ const HeroSection = () => (
           </svg>
         </a>
         <a
-          href="https://github.com/your-username"
+          href="https://github.com/nyihtutzaw"
           target="_blank"
           rel="noopener noreferrer"
           className="text-gray-800 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-200"
@@ -48,7 +48,7 @@ const HeroSection = () => (
         Hi, I'm <span className="text-blue-600 dark:text-blue-400">Nyi Htut Zaw</span>
       </h1>
       <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-6">
-        Senior Software Engineer & Technology Consultant
+        Senior Software Engineer
       </p>
       <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl">
         With extensive experience in web, mobile, and AI-powered applications, I deliver robust solutions

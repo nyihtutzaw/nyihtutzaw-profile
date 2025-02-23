@@ -6,6 +6,7 @@ import SkillsSection from '@/components/home/SkillsSection';
 import CertificationSection from '@/components/home/CertificationSection';
 import ProjectShowcase from '@/components/home/ProjectShowcase';
 import BlogSection from '@/components/home/BlogSection';
+import CoursesSection from '@/components/home/CoursesSection';
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <SkillsSection />
       <ProjectShowcase />
       <CertificationSection />
+      <CoursesSection />
       <BlogSection />
     </div>
   );

@@ -2,21 +2,34 @@ import { Certification } from '@/types/certifications';
 
 export const certifications: Certification[] = [
   {
-    title: 'Professional Certificate in Cloud Development',
-    image: '/certifications/mit-cloud.jpg',
-    issuedBy: 'MIT Professional Education',
-    date: '2021'
+    title: 'AI For Everyone',
+    image: '/certifications/aiforeveryone.png',
+    issuedBy: 'Deep Learning AI',
+    date: '2025'
   },
   {
-    title: 'AWS Certified Solutions Architect',
-    image: '/certifications/aws-sa.jpg',
-    issuedBy: 'Amazon Web Services',
-    date: '2022'
+    title: 'Supervised Machine Learning: Regression and Classification',
+    image: '/certifications/supervisedml.png',
+    issuedBy: 'Deep Learning AI',
+    date: '2024'
   },
   {
-    title: 'Professional Scrum Master I',
-    image: '/certifications/psm.jpg',
-    issuedBy: 'Scrum.org',
+    title: 'Blockchain Expert',
+    image: '/certifications/blockchain.png',
+    issuedBy: 'Algoexport',
+    date: '2024'
+  },
+  {
+    title: 'English Proficiency',
+    image: '/certifications/duolingo.png',
+    issuedBy: 'Duolingo',
+    date: '2024'
+  },
+  {
+    title: 'Advanced React',
+    image: '/certifications/advancedreact.png',
+    issuedBy: 'Meta',
     date: '2023'
-  }
+  },
+  
 ];
