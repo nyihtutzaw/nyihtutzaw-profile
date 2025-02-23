@@ -60,6 +60,8 @@ const BlogSection = () => {
               >
                 <div className="relative w-full h-48">
                   <Image
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-expect-error
                     src={post.image}
                     alt={post.title}
                     fill

@@ -10,10 +10,10 @@ const AboutSection = () => (
           After graduation, I joined Union Myanmar, an INGO organization focused on healthcare services for TB and HIV patients. As a development team lead for five years, I managed junior developers while expanding my expertise in Docker, CI/CD, AWS, and project management. My core technical skills include React, Laravel, Express, and Flutter.
         </p>
         <p>
-          From 2023 to 2024, At Magic Box Solution, a Thai software company, I contributed to developing e-commerce projects for Japanese brands and global clothing company. Currently, I'm leading a team of software developers at RV Connex's Cypher Security department, where we develop AI-powered security solutions. I am currently based in Thailand.
+          {`From 2023 to 2024, At Magic Box Solution, a Thai software company, I contributed to developing e-commerce projects for Japanese brands and global clothing company. Currently, I'm leading a team of software developers at RV Connex's Cypher Security department, where we develop AI-powered security solutions. I am currently based in Thailand.`}
         </p>
         <p>
-          Throughout my career, I've developed strong communication skills, technical expertise, and proficiency in code quality control, testing, system design, and version control through practical experience and continuous learning.
+          {`Throughout my career, I've developed strong communication skills, technical expertise, and proficiency in code quality control, testing, system design, and version control through practical experience and continuous learning.`}
         </p>
       </div>
     </div>
