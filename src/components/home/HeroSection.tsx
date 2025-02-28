@@ -1,3 +1,6 @@
+'use client';
+import { generateCV } from '@/utils/generateCV';
+
 const HeroSection = () => (
   <section className="flex flex-col md:flex-row items-center justify-center gap-8 py-16 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/10 dark:to-blue-900/20">
     <div className="flex flex-col items-center">
@@ -50,11 +53,17 @@ const HeroSection = () => (
       <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-6">
         Senior Software Engineer
       </p>
-      <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl">
+      <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mb-6">
         With extensive experience in web, mobile, and AI-powered applications, I deliver robust solutions
         across diverse technology stacks. I provide technical consulting for IT projects and share my
         expertise through software development mentorship.
       </p>
+      <button
+        onClick={generateCV}
+        className="bg-gray-800 dark:bg-gray-700 text-white px-6 py-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors"
+      >
+        Download CV
+      </button>
     </div>
   </section>
 );

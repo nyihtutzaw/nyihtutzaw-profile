@@ -10,6 +10,7 @@ interface WorkExperience {
     description?: string;
     skills?: string[];
     details?: string;
+    showInCV?:boolean;
 }
 
 export const workExperienceData: WorkExperience[] = [
@@ -21,6 +22,7 @@ export const workExperienceData: WorkExperience[] = [
         type: "Full-time",
         period: "Sep 2024 - Present · 6 mos",
         location: "Pathum Thani, Thailand · On-site",
+        showInCV:true,
         description: "Leading a software development team for AI-Powered Cypher Security Software Solution.",
         skills: ["TypeScript", "Python", "Cypher Security", "Redux.js", "Tailwind CSS", "Apollo GraphQL", "monorepo", "XDR", "EDR", "Flowbite"],
         details: `
@@ -61,6 +63,7 @@ export const workExperienceData: WorkExperience[] = [
         company: "Magic Box Solutions",
         type: "Full-time",
         period: "Aug 2023 - Sep 2024 · 1 yr 2 mos",
+        showInCV:true,
         location: "Bangkok, Bangkok City, Thailand",
         description: "Developed e-commerce projects for Japanese brands and global clothing company.",
         skills: ["Magento", "React Native", "React.js", "nextjs", "nodejs", "Amazon Web Services (AWS)", "Gitlab"],
@@ -114,6 +117,7 @@ export const workExperienceData: WorkExperience[] = [
     {
         logo: "/work/union.jpeg",
         logoAlt: "The Union Logo",
+        showInCV:true,
         title: "Software Developer",
         company: "International Union Against Tuberculosis and Lung Disease (The Union), Myanmar Office",
         type: "Full-time",
@@ -152,6 +156,7 @@ export const workExperienceData: WorkExperience[] = [
     {
         logo: "/work/nexstack.png",
         logoAlt: "Nexstack Logo",
+        showInCV:true,
         title: "Full Stack Engineer",
         company: "Nexstack",
         type: "Part-time",
