@@ -52,4 +52,15 @@ export const skillGroups: SkillGroup[] = [
       { name: 'Vercel AI', logo: '/skills/vercel.png' },
     ]
   },
+  {
+    name: 'Web3',
+    skills: [
+      { name: 'Solidity', logo: '/skills/solidity.png' },
+      { name: 'Hardhat', logo: '/skills/hardhat.png' },
+      { name: 'Truffle', logo: '/skills/truffle.png' },
+      { name: 'Web3.js', logo: '/skills/web3js.png' },
+      { name: 'Ethers.js', logo: '/skills/etherjs.png' },
+      { name: 'MetaMask', logo: '/skills/metamask.png' },
+    ]
+  },
 ];

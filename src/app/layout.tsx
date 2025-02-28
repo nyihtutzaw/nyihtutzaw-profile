@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import ScrollToTop from '@/components/ScrollToTop'
+import { ThemeProvider } from '@/context/ThemeContext'
+import ThemeToggle from '@/components/ThemeToggle'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,16 +18,22 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} bg-myColor-50 text-myColor-900 dark:bg-myColor-900 dark:text-myColor-50 flex flex-col min-h-screen`}>
-        <main className="flex-grow pt-16 px-4">
-          <div className="max-w-5xl mx-auto">
-            {children}
+        <ThemeProvider>
+          <div className="fixed top-4 right-4 z-50">
+            <ThemeToggle />
           </div>
-        </main>
-        <footer className="py-6 text-center text-myColor-600 dark:text-myColor-300">
-          <p>© {new Date().getFullYear()} Nyi Htut Zaw. All rights reserved.</p>
-        </footer>
+          <main className="flex-grow pt-16 px-4">
+            <div className="max-w-5xl mx-auto">
+              {children}
+            </div>
+          </main>
+          <footer className="py-6 text-center text-myColor-600 dark:text-myColor-300">
+            <p>© {new Date().getFullYear()} Nyi Htut Zaw. All rights reserved.</p>
+          </footer>
+          <ScrollToTop />
+        </ThemeProvider>
       </body>
     </html>
   )
