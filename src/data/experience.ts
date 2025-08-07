@@ -20,7 +20,7 @@ export const workExperienceData: WorkExperience[] = [
         title: "Senior Full Stack Engineer",
         company: "RV Connex",
         type: "Full-time",
-        period: `Sep 2024 - Present ·  ${((d, y = d.getUTCFullYear() - 2024, m = d.getUTCMonth() - 8 + (y * 12)) => y < 1 ? `${m} months` : `${Math.floor(m/12)>=1?Math.floor(m/12) "yr, ":""} ${m % 12} months`)(new Date())}`,
+        period: `Sep 2024 - Present · 11 months`,
         location: "Pathum Thani, Thailand · On-site",
         showInCV:true,
         description: "Leading a software development team for AI-Powered Cypher Security Software Solution.",
