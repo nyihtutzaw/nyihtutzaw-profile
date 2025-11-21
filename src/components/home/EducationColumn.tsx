@@ -1,20 +1,30 @@
 import { educationData } from "@/data/education";
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
+const EducationColumn = () => {
+  const { ref, isVisible } = useScrollAnimation();
 
-const EducationColumn = () => (
-  <div>
-    <h2 className="text-3xl font-bold mb-8 text-center">Education</h2>
-    <div className="space-y-8">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {educationData.map((education, index) => (
-          <div 
-            key={index} 
-            className={`flex flex-col p-6 rounded-lg shadow-md relative overflow-hidden ${
-              education.isHighlighted 
-                ? 'bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border-2 border-blue-300 dark:border-blue-600' 
-                : 'bg-white dark:bg-gray-800'
-            }`}
-          >
+  return (
+    <div ref={ref}>
+      <h2 className={`text-3xl font-bold mb-8 text-center transition-all duration-1000 transform ${
+        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+      }`}>
+        Education
+      </h2>
+      <div className={`space-y-8 transition-all duration-1000 delay-300 transform ${
+        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+      }`}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {educationData.map((education, index) => (
+            <div 
+              key={index} 
+              className={`flex flex-col p-6 rounded-lg shadow-md relative overflow-hidden transition-all duration-500 hover:shadow-lg ${
+                education.isHighlighted 
+                  ? 'bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border-2 border-blue-300 dark:border-blue-600' 
+                  : 'bg-white dark:bg-gray-800'
+              }`}
+              style={{ transitionDelay: `${400 + index * 100}ms` }}
+            >
             {/* Current Badge */}
             {education.isCurrent && (
               <div className="absolute top-3 right-3">
@@ -102,6 +112,7 @@ const EducationColumn = () => (
       </div>
     </div>
   </div>
-);
+  );
+};
 
 export default EducationColumn;

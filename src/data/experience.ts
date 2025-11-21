@@ -67,7 +67,7 @@ export const workExperienceData: WorkExperience[] = [
         period: `Sep 2024 - Sep 2025 · 1 yr 1 mos`,
         location: "Pathum Thani, Thailand · On-site",
         showInCV: true,
-        description: "Leading a software development team for AI-Powered Cypher Security Software Solution.",
+        description: "Senior Full Stack Engineer leading development of AI-powered cybersecurity platform, coordinating cross-functional teams to deliver comprehensive security solutions with data pipelines, automated investigation systems, and mobile applications.",
         skills: ["TypeScript", "Python", "Cypher Security", "Redux.js", "Tailwind CSS", "Apollo GraphQL", "monorepo", "XDR", "EDR", "Flowbite"],
         details: `
          <div class="space-y-4">

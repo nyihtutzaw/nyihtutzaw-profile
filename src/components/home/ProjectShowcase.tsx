@@ -1,8 +1,16 @@
+'use client';
+
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+
 const ProjectShowcase = () => {
+  const { ref, isVisible } = useScrollAnimation();
+
   return (
-    <section className="py-16 px-4">
+    <section ref={ref} className="py-16 px-4">
       <div className="max-w-6xl mx-auto">   
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-12">
+        <div className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg p-12 transition-all duration-1000 transform ${
+          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+        }`}>
           <div className="flex flex-col items-center justify-center space-y-6 text-center">
             <div className="w-24 h-24 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
               <svg 
