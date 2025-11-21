@@ -13,7 +13,7 @@ const HeroSection = () => (
       </div>
       <div className="flex gap-4">
         <a
-          href="mailto:nyihtutzaw.2015@gmaill.com"
+          href="mailto:nyihtutzaw.2015@gmail.com"
           className="text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300"
           aria-label="Email"
         >
