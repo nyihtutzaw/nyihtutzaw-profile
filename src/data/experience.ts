@@ -110,7 +110,7 @@ export const workExperienceData: WorkExperience[] = [
         showInCV: true,
         location: "Bangkok, Bangkok City, Thailand",
         description: "Senior Full Stack Engineer developing robust e-commerce solutions for Japanese brands and global clothing companies using Magento, React, and modern web technologies.",
-        skills: ["Magento", "React Native", "React.js", "Next.js", "Node.js", "Amazon Web Services (AWS)", "GitLab"],
+        skills: ["Magento", "React Native", "React.js", "Node.js", "Amazon Web Services (AWS)", "GitLab"],
         details: `<div class="space-y-4">
         <p>Senior Full Stack Engineer specializing in e-commerce development for international clients. Expertise in Magento platform customization, React-based frontend development, and AWS cloud deployment. Successfully led multiple high-stakes projects including major system migrations and new platform implementations.</p>
         
@@ -118,7 +118,7 @@ export const workExperienceData: WorkExperience[] = [
           <h4 class="font-semibold text-lg">Responsibilities</h4>
           <ul class="list-disc pl-5 space-y-2">
             <li>Develop and maintain e-commerce applications using PHP Magento for backend functionality</li>
-            <li>Create responsive frontend interfaces with React.js and Next.js for optimal user experience</li>
+            <li>Create responsive frontend interfaces with React.js for optimal user experience</li>
             <li>Implement complex business logic for authentication, checkout flows, and payment processing</li>
             <li>Design and execute system migration strategies from legacy platforms to modern architectures</li>
             <li>Develop custom migration scripts using JavaScript for seamless data transfer</li>
@@ -149,15 +149,15 @@ export const workExperienceData: WorkExperience[] = [
         type: "Contract",
         period: "Oct 2023 - May 2024 · 8 mos",
         location: "Online · Remote",
-        description: "Senior Software Engineer providing technical expertise for heymyanmar.com platform development using Next.js, Express.js, and cloud technologies.",
-        skills: ["Next.js", "Express.js", "PostgreSQL", "MUI", "AWS Elastic Beanstalk"],
+        description: "Senior Software Engineer providing technical expertise for heymyanmar.com platform development using Express.js and cloud technologies.",
+        skills: ["Express.js", "PostgreSQL", "MUI", "AWS Elastic Beanstalk"],
         details: `<div class="space-y-4">
         <p>Senior Software Engineer contracted to develop and enhance the heymyanmar.com platform. Focused on building scalable web applications with modern JavaScript stack, implementing robust backend services, and ensuring optimal deployment on AWS cloud infrastructure.</p>
         
         <div class="space-y-3">
           <h4 class="font-semibold text-lg">Responsibilities</h4>
           <ul class="list-disc pl-5 space-y-2">
-            <li>Develop full-stack web applications using Next.js for frontend and Express.js for backend services</li>
+            <li>Develop full-stack web applications using React.js for frontend and Express.js for backend services</li>
             <li>Design and implement PostgreSQL database schemas for efficient data management</li>
             <li>Create responsive user interfaces using Material-UI (MUI) component library</li>
             <li>Build RESTful APIs for data communication between frontend and backend systems</li>
@@ -189,16 +189,16 @@ export const workExperienceData: WorkExperience[] = [
         type: "Full-time",
         period: "Feb 2022 - Jul 2023 · 1 yr 6 mos",
         location: "Remote",
-        description: "React Developer building modern web applications for Japanese clients using React.js, Next.js, and TypeScript with focus on performance and user experience.",
-        skills: ["Next.js", "React.js", "TypeScript"],
+        description: "React Developer building modern web applications for Japanese clients using React.js and TypeScript with focus on performance and user experience.",
+        skills: ["React.js", "TypeScript"],
         details: `<div class="space-y-4">
-        <p>React Developer specializing in building modern web applications for Japanese clients. Expertise in React ecosystem including hooks, context API, and Next.js for server-side rendering. Strong focus on creating responsive, high-performance applications with TypeScript for type safety and better developer experience.</p>
+        <p>React Developer specializing in building modern web applications for Japanese clients. Expertise in React ecosystem including hooks, context API, and modern web technologies. Strong focus on creating responsive, high-performance applications with TypeScript for type safety and better developer experience.</p>
         
         <div class="space-y-3">
           <h4 class="font-semibold text-lg">Responsibilities</h4>
           <ul class="list-disc pl-5 space-y-2">
             <li>Develop interactive and responsive user interfaces using React.js and modern JavaScript patterns</li>
-            <li>Implement Next.js for server-side rendering and improved SEO performance</li>
+            <li>Implement modern web technologies for improved performance and SEO</li>
             <li>Utilize TypeScript for type-safe development and better code maintainability</li>
             <li>Create reusable React components following best practices and design patterns</li>
             <li>Implement state management using React Context API and custom hooks</li>
@@ -261,51 +261,6 @@ export const workExperienceData: WorkExperience[] = [
             <li>Implemented container-based deployment reducing deployment issues by 85%</li>
             <li>Created comprehensive patient monitoring systems improving healthcare delivery efficiency</li>
             <li>Successfully migrated legacy systems to modern architecture with zero data loss</li>
-          </ul>
-        </div>
-      </div>`
-    },
-    {
-        logo: "/work/nexstack.png",
-        logoAlt: "Nexstack Logo",
-        showInCV: true,
-        title: "Full Stack Engineer",
-        company: "Nexstack",
-        type: "Part-time",
-        period: "Mar 2017 - Jan 2019 · 1 yr 11 mos",
-        location: "Singapore · Remote",
-        description: "Lead Full Stack Engineer managing cross-functional teams and developing enterprise-level applications for Singapore clients using modern web technologies and agile methodologies.",
-        skills: ["Containerization", "TypeScript", "Next.js", "Figma", "Software Development", "Strapi.js", "Agile Project Management", "React Native", "React.js", "GraphQL", "Apollo GraphQL"],
-        details: `<div class="space-y-4">
-        <p>Lead Full Stack Engineer managing and mentoring cross-functional development teams of 12+ developers. Expertise in enterprise-level application development, system architecture design, and technical leadership. Successfully delivered multiple projects for Singapore clients while establishing coding standards and best practices for development teams.</p>
-        
-        <div class="space-y-3">
-          <h4 class="font-semibold text-lg">Responsibilities</h4>
-          <ul class="list-disc pl-5 space-y-2">
-            <li>Lead and mentor 3 distinct developer teams fostering collaboration and knowledge sharing</li>
-            <li>Design scalable system architecture and microservice implementations for enterprise applications</li>
-            <li>Develop full-stack applications using Next.js, React.js, and Node.js with TypeScript</li>
-            <li>Implement GraphQL APIs with Apollo for efficient data communication</li>
-            <li>Create and manage CMS solutions using Strapi.js for content management</li>
-            <li>Develop cross-platform mobile applications using React Native</li>
-            <li>Establish CI/CD pipelines using GitHub Actions for automated testing and deployment</li>
-            <li>Conduct technical training and establish coding standards for development teams</li>
-            <li>Collaborate with foreign clients in technical meetings and project planning</li>
-            <li>Review and merge code contributions ensuring quality and adherence to standards</li>
-          </ul>
-        </div>
-
-        <div class="space-y-3">
-          <h4 class="font-semibold text-lg">Achievements</h4>
-          <ul class="list-disc pl-5 space-y-2">
-            <li>Led development of Supplier Portal platform serving major Singapore supermarket chain</li>
-            <li>Successfully delivered Procard business networking application used by 10,000+ professionals</li>
-            <li>Established development team processes improving productivity by 45%</li>
-            <li>Reduced code review time by 60% through automated testing and quality standards</li>
-            <li>Implemented microservice architecture improving system scalability by 80%</li>
-            <li>Created reusable component library saving 40% development time across projects</li>
-            <li>Achieved 99.9% uptime through robust CI/CD and monitoring systems</li>
-            <li>Successfully mentored 15+ junior developers who advanced to senior positions</li>
           </ul>
         </div>
       </div>`

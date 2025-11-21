@@ -15,7 +15,6 @@ const WorkExperienceColumn = () => {'use client';
 
   return (
     <div>
-      <h2 className="text-3xl font-bold mb-8 text-center">Work Experience</h2>
       <div className="space-y-8">
         {workExperienceData.map((experience, index) => (
           <div key={index} className="flex flex-col bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">

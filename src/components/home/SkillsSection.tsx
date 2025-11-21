@@ -10,8 +10,6 @@ const SkillsSection = () => {
   return (
     <section className="py-16 px-4">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8 text-center">Skills</h2>
-        
         {/* Tabs */}
         <div className="flex flex-wrap justify-center gap-2 mb-8">
           {skillGroups.map((group, index) => (

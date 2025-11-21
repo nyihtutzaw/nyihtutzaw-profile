@@ -48,17 +48,6 @@ const BlogSection = () => {
   return (
     <section className="py-16 px-4">
       <div className="max-w-4xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold">Blog Posts</h2>
-          <a
-            href="https://medium.com/@nyihtutzaw.2015"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 dark:text-blue-400 hover:underline"
-          >
-            View All →
-          </a>
-        </div>
 
         {isLoading ? (
           <div className="flex justify-center py-12">

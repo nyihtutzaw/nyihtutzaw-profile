@@ -1,23 +1,244 @@
-const AboutSection = () => (
-  <section className="py-16 px-4">
-    <div className="max-w-4xl mx-auto">
-      <h2 className="text-3xl font-bold mb-8 text-center">About Me</h2>
-      <div className="space-y-6 text-gray-600 dark:text-gray-300">
-        <p>
-          I am an experienced developer who began my career while attending university, balancing freelance software development projects and teaching programming. During my university years, I worked remotely with Nexstack Singapore as a developer, where I gained valuable experience working on various projects using modern technologies.
-        </p>
-        <p>
-          After graduation, I joined Union Myanmar, an INGO organization focused on healthcare services for TB and HIV patients. As a development team lead for five years, I managed junior developers while expanding my expertise in Docker, CI/CD, AWS, and project management. My core technical skills include React, Laravel, Express, and Flutter.
-        </p>
-        <p>
-          {`From 2023 to 2024, at Magic Box Solution, a Thai software company, I contributed to developing e-commerce projects for Japanese brands and global clothing companies. From 2024 to 2025, I led a team of software developers at RV Connex's Cypher Security department, where we developed AI-powered security solutions. Currently, I'm working as a Senior Software Engineer at ArcFusion, a leading AI company in Bangkok, where I focus on developing cutting-edge Generative AI applications and solutions for enterprise clients. I am currently based in Thailand.`}
-        </p>
-        <p>
-          {`Throughout my career, I've developed strong communication skills, technical expertise, and proficiency in code quality control, testing, system design, and version control through practical experience and continuous learning.`}
-        </p>
+'use client';
+
+import { useState, useEffect, useRef } from 'react';
+import { 
+  CodeBracketIcon, 
+  CloudArrowUpIcon,
+  LightBulbIcon,
+  RocketLaunchIcon,
+  AcademicCapIcon,
+  HeartIcon
+} from '@heroicons/react/24/outline';
+
+const AboutSection = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  const timelineEvents = [
+    {
+      year: '2017-2019',
+      title: 'Early Development Journey',
+      description: 'Started as a freelance developer while teaching programming, gaining hands-on experience with modern web technologies and building foundational skills.',
+      icon: CodeBracketIcon,
+      color: 'from-blue-500 to-blue-600'
+    },
+    {
+      year: '2019-2024',
+      title: 'Healthcare Tech Leadership',
+      description: 'Led development teams at Union Myanmar, implementing scalable healthcare solutions and mentoring junior developers while mastering cloud technologies.',
+      icon: HeartIcon,
+      color: 'from-green-500 to-green-600'
+    },
+    {
+      year: '2023-2024',
+      title: 'E-Commerce Excellence',
+      description: 'Developed robust e-commerce platforms for Japanese brands, specializing in Magento customization and React-based frontend solutions.',
+      icon: CloudArrowUpIcon,
+      color: 'from-purple-500 to-purple-600'
+    },
+    {
+      year: '2024-2025',
+      title: 'Cybersecurity Innovation',
+      description: 'Led AI-powered security solutions development at RV Connex, integrating advanced technologies for enterprise-level protection systems.',
+      icon: LightBulbIcon,
+      color: 'from-red-500 to-red-600'
+    },
+    {
+      year: '2024-Present',
+      title: 'AI-Powered Future',
+      description: 'Senior Software Engineer at ArcFusion, developing cutting-edge Generative AI applications using Python, Golang, and modern cloud technologies.',
+      icon: RocketLaunchIcon,
+      color: 'from-indigo-500 to-indigo-600'
+    }
+  ];
+
+  const coreValues = [
+    {
+      title: 'Innovation',
+      description: 'Constantly exploring new technologies and approaches to solve complex problems',
+      icon: LightBulbIcon
+    },
+    {
+      title: 'Quality',
+      description: 'Committed to writing clean, maintainable code and delivering exceptional user experiences',
+      icon: CodeBracketIcon
+    },
+    {
+      title: 'Growth',
+      description: 'Continuous learning and skill development to stay at the forefront of technology',
+      icon: AcademicCapIcon
+    }
+  ];
+
+  return (
+    <section ref={sectionRef} className="py-20 px-8 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className={`text-center mb-16 transition-all duration-1000 transform ${
+          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+        }`}>
+          <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            About My Journey
+          </h2>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            From a passionate developer teaching programming to a Senior Software Engineer shaping the future of AI. 
+            My journey is driven by curiosity, innovation, and the pursuit of excellence in every line of code.
+          </p>
+        </div>
+
+        {/* Personal Introduction */}
+        <div className={`grid md:grid-cols-2 gap-12 mb-20 transition-all duration-1000 delay-300 transform ${
+          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+        }`}>
+          <div className="space-y-6">
+            <h3 className="text-3xl font-semibold text-gray-900 dark:text-white mb-4">
+              More Than Just Code
+            </h3>
+            <div className="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed">
+              <p>
+                I believe technology should serve humanity. Throughout my career, I've focused on creating solutions 
+                that make a real difference - whether it's healthcare systems that save lives or AI applications 
+                that unlock human potential.
+              </p>
+              <p>
+                Based in Bangkok, Thailand, I bring a global perspective to every project, having worked with 
+                clients and teams across Asia and beyond. My approach combines technical expertise with a deep 
+                understanding of business needs and user experiences.
+              </p>
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-1 gap-4">
+            {coreValues.map((value, index) => {
+              const Icon = value.icon;
+              return (
+                <div 
+                  key={value.title}
+                  className={`bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-gray-200 dark:border-gray-700`}
+                  style={{ transitionDelay: `${400 + index * 100}ms` }}
+                >
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                        {value.title}
+                      </h4>
+                      <p className="text-gray-600 dark:text-gray-300 text-sm">
+                        {value.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Timeline */}
+        <div className={`mb-16 transition-all duration-1000 delay-500 transform ${
+          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+        }`}>
+          <h3 className="text-3xl font-semibold text-center text-gray-900 dark:text-white mb-12">
+            Career Timeline
+          </h3>
+          
+          <div className="relative">
+            {/* Timeline Line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-500 to-purple-600 rounded-full" />
+            
+            {/* Timeline Events */}
+            <div className="space-y-12">
+              {timelineEvents.map((event, index) => {
+                const Icon = event.icon;
+                const isLeft = index % 2 === 0;
+                
+                return (
+                  <div 
+                    key={event.year}
+                    className={`relative flex items-center ${
+                      isLeft ? 'justify-start' : 'justify-end'
+                    }`}
+                    style={{ transitionDelay: `${600 + index * 150}ms` }}
+                  >
+                    <div className={`w-5/12 ${isLeft ? 'text-right pr-8' : 'text-left pl-8 order-1'}`}>
+                      <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-gray-200 dark:border-gray-700">
+                        <div className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold text-white bg-gradient-to-r ${event.color} mb-3`}>
+                          {event.year}
+                        </div>
+                        <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                          {event.title}
+                        </h4>
+                        <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                          {event.description}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    {/* Timeline Dot */}
+                    <div className="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-white dark:bg-gray-900 border-4 border-gray-200 dark:border-gray-700 rounded-full z-10">
+                      <div className={`absolute inset-1 bg-gradient-to-r ${event.color} rounded-full animate-pulse`} />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Call to Action */}
+        <div className={`text-center transition-all duration-1000 delay-1000 transform ${
+          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+        }`}>
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white">
+            <h3 className="text-2xl font-bold mb-4">
+              Let's Build Something Amazing Together
+            </h3>
+            <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
+              I'm always excited to collaborate on innovative projects that push the boundaries of technology. 
+              Whether you need a full-stack application, AI solution, or technical consultation, I'm here to help.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="/contact"
+                className="px-8 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
+              >
+                Get In Touch
+              </a>
+              <a
+                href="/projects"
+                className="px-8 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-400 transition-colors"
+              >
+                View My Work
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default AboutSection;

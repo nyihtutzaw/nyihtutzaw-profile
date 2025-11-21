@@ -12,7 +12,7 @@ const courses = [
   {
     title: "React Specialization",
     image: "/courses/react-course.jpg",
-    description: "Deep dive into React ecosystem including Redux, Next.js, and Testing. Build production-ready applications with modern React patterns."
+    description: "Deep dive into React ecosystem including Redux, Testing. Build production-ready applications with modern React patterns."
   }
 ];
 

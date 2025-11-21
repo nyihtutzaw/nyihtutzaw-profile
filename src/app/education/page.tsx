@@ -5,15 +5,14 @@ import Image from 'next/image';
 export default function EducationPage() {
   return (
     <Layout>
-      <div className="max-w-4xl">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Education
-          </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300">
-            My academic background and educational qualifications.
-          </p>
-        </div>
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          Education
+        </h1>
+        <p className="text-lg text-gray-600 dark:text-gray-300">
+          My academic background and educational qualifications.
+        </p>
+      </div>
 
         <div className="space-y-6">
           {educationData.map((edu, index) => (
@@ -62,7 +61,6 @@ export default function EducationPage() {
             </div>
           ))}
         </div>
-      </div>
     </Layout>
   );
 }

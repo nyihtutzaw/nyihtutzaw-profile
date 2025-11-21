@@ -4,17 +4,16 @@ import Image from 'next/image';
 export default function ContactPage() {
   return (
     <Layout>
-      <div className="max-w-4xl">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Get In Touch
-          </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300">
-            Feel free to reach out for collaborations, opportunities, or just to say hello!
-          </p>
-        </div>
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          Get In Touch
+        </h1>
+        <p className="text-lg text-gray-600 dark:text-gray-300">
+          Feel free to reach out for collaborations, opportunities, or just to say hello!
+        </p>
+      </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
           <div className="grid md:grid-cols-2 gap-8">
             {/* Contact Information */}
             <div>
@@ -110,7 +109,6 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
-      </div>
     </Layout>
   );
 }
