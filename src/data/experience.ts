@@ -15,7 +15,7 @@ interface WorkExperience {
 
 export const workExperienceData: WorkExperience[] = [
     {
-        logo: "/work/arcfusion-placeholder.png",
+        logo: "/work/arcfusion.png",
         logoAlt: "ArcFusion Logo",
         title: "Senior Software Engineer",
         company: "ArcFusion",
