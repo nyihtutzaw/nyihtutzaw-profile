@@ -6,9 +6,22 @@ interface Education {
     institution: string;
     skills?: string[];
     grade?: string;
+    isCurrent?: boolean;
+    isHighlighted?: boolean;
   }
   
   export const educationData: Education[] = [
+    {
+      logo: "/education/mahidol.png",
+      logoAlt: "Mahidol University Logo",
+      period: "Dec 2025 - Present",
+      degree: "Master of Science in Computer Science",
+      institution: "Mahidol University",
+      grade: "In Progress",
+      isCurrent: true,
+      isHighlighted: true,
+      skills: ["Machine Learning", "Artificial Intelligence", "Advanced Algorithms", "Data Structures"]
+    },
     {
       logo: "/education/uclan.png",
       logoAlt: "UCLan Logo",
