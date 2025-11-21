@@ -53,7 +53,14 @@ export const generateCV = () => {
     // Right column - Contact Information
     yPos = initialYPos;
     const rightColumnX = pageWidth / 2 + 10;
+    
+    // Get dynamic portfolio URL
+    const portfolioUrl = typeof window !== 'undefined' 
+      ? `${window.location.origin}` 
+      : 'https://nyihtutzaw.github.io';
+    
     addText('Email: nyihtutzaw.2015@gmail.com', 10, false, lineHeight, rightColumnX);
+    addText('Portfolio: ' + portfolioUrl, 10, false, lineHeight, rightColumnX);
     addText('LinkedIn: linkedin.com/in/nyihtutzaw', 10, false, lineHeight, rightColumnX);
     addText('GitHub: github.com/nyihtutzaw', 10, false, lineHeight, rightColumnX);
     addText('Medium: medium.com/@nyihtutzaw.2015', 10, false, lineHeight, rightColumnX);
