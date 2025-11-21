@@ -16,7 +16,7 @@ export const skillGroups: SkillGroup[] = [
     name: 'Frameworks',
     skills: [
       { name: 'React', logo: '/skills/react.png' },
-      { name: 'Next.js', logo: '/skills/nextjs.png' },
+      { name: 'React.js', logo: '/skills/reactjs.png' },
       { name: 'Fast Api', logo: '/skills/fastapi.png' },
       { name: 'Echo', logo: '/skills/echo.png' },
       { name: 'Laravel', logo: '/skills/laravel.png' },

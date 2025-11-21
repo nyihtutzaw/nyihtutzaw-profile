@@ -3,10 +3,11 @@ import Image from 'next/image';
 
 interface SkillCardProps {
   skill: Skill;
+  style?: React.CSSProperties;
 }
 
-const SkillCard = ({ skill }: SkillCardProps) => (
-  <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+const SkillCard = ({ skill, style }: SkillCardProps) => (
+  <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow" style={style}>
     <div className="flex flex-col items-center space-y-3">
       <div className="w-12 h-12 relative">
         <Image

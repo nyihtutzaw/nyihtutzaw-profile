@@ -2,23 +2,27 @@
 
 import { workExperienceData } from "@/data/experience";
 import { useState } from "react";
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
-
-
-const WorkExperienceColumn = () => {'use client';
-  
+const WorkExperienceColumn = () => {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const { ref, isVisible } = useScrollAnimation();
 
   const toggleDetails = (index: number) => {
     setExpandedIndex(expandedIndex === index ? null : index);
   };
 
   return (
-    <div>
-      <h2 className="text-3xl font-bold mb-8 text-center">Work Experience</h2>
-      <div className="space-y-8">
+    <div ref={ref}>
+      <div className={`space-y-8 transition-all duration-1000 transform ${
+        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+      }`}>
         {workExperienceData.map((experience, index) => (
-          <div key={index} className="flex flex-col bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+          <div 
+            key={index} 
+            className="flex flex-col bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+            style={{ transitionDelay: `${index * 100}ms` }}
+          >
             <div className="flex items-start space-x-4">
               <div className="w-16 h-16 flex-shrink-0">
                 <img
@@ -53,24 +57,21 @@ const WorkExperienceColumn = () => {'use client';
                     </div>
                   </div>
                 )}
-                {
-                  experience.details && (
-                    <button
+                {experience.details && (
+                  <button
                     onClick={() => toggleDetails(index)}
                     className="mt-4 px-4 py-2 bg-myColor-500 text-white rounded-md hover:bg-myColor-600 transition-colors"
                   >
                     {expandedIndex === index ? 'Hide Details' : 'View Details'}
                   </button>
-                  )
-                }
-             
+                )}
               </div>
             </div>
             {expandedIndex === index && experience.details && (
               <div className="mt-4 pl-20">
                 <div 
-                    className="border-l-2 border-myColor-500 pl-4 space-y-2"
-                    dangerouslySetInnerHTML={{ __html: experience.details }}
+                  className="border-l-2 border-myColor-500 pl-4 space-y-2"
+                  dangerouslySetInnerHTML={{ __html: experience.details }}
                 />
               </div>
             )}

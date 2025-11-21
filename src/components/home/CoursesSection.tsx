@@ -1,18 +1,18 @@
 const courses = [
   {
-    title: "Fullstack Development with Javascript",
+    title: "Full-stack Development with JavaScript",
     image: "/courses/fullstack-js.jpg",
     description: "Master modern full-stack development using Node.js, React, and MongoDB. Learn to build scalable web applications from scratch with industry best practices."
   },
   {
-    title: "Dockerizing NodeJS Application",
+    title: "Dockerizing Node.js Application",
     image: "/courses/docker-nodejs.jpg",
     description: "Learn how to containerize Node.js applications using Docker. Cover deployment, scaling, and microservices architecture with practical examples."
   },
   {
     title: "React Specialization",
     image: "/courses/react-course.jpg",
-    description: "Deep dive into React ecosystem including Redux, Next.js, and Testing. Build production-ready applications with modern React patterns."
+    description: "Deep dive into React ecosystem including Redux, Testing. Build production-ready applications with modern React patterns."
   }
 ];
 
