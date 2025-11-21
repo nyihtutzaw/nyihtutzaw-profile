@@ -143,12 +143,6 @@ export const generateCV = () => {
     });
 
     // Add additional sections
-    addSection('Certifications & Training');
-    addText('• Google Cloud Professional Certification', 10, false, 5);
-    addText('• AWS Solutions Architect Certification', 10, false, 5);
-    addText('• Advanced Machine Learning & AI Training', 10, false, 5);
-    yPos += 3;
-
     addSection('Languages');
     addText('• English (Professional Working Proficiency)', 10, false, 5);
     addText('• Burmese (Native)', 10, false, 5);
