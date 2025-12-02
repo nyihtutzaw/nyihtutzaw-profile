@@ -1,0 +1,30 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#6366F1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="1" stdDeviation="1" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  
+  <!-- Rounded square background -->
+  <rect width="32" height="32" rx="6" fill="url(#bgGradient)" filter="url(#shadow)"/>
+  
+  <!-- Code brackets representing programming -->
+  <path d="M8 10 L6 12 L6 20 L8 22" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M24 10 L26 12 L26 20 L24 22" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+  
+  <!-- NHZ initials -->
+  <text x="16" y="20" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle" fill="white">
+    NHZ
+  </text>
+  
+  <!-- Small decorative dots -->
+  <circle cx="10" cy="8" r="1.5" fill="white" opacity="0.9"/>
+  <circle cx="16" cy="8" r="1.5" fill="white" opacity="0.9"/>
+  <circle cx="22" cy="8" r="1.5" fill="white" opacity="0.9"/>
+</svg>
