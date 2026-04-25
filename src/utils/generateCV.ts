@@ -2,6 +2,7 @@ import { educationData } from '@/data/education';
 import jsPDF from 'jspdf';
 import { workExperienceData } from '@/data/experience';
 import { skillGroups } from '@/data/skills';
+import { formatPeriod } from '@/utils/dateUtils';
 
 export const generateCV = () => {
     const doc = new jsPDF();
@@ -80,7 +81,7 @@ export const generateCV = () => {
         yPos += 3;
 
         addText(`${exp.title.toUpperCase()} | ${exp.company.toUpperCase()}`, 12, true);
-        addText(`${exp.period} | ${exp.location}`, 10, false, 5);
+        addText(`${formatPeriod(exp.startDate, exp.endDate)} | ${exp.location}`, 10, false, 5);
         
         // Add company description if available
         if (exp.description) {

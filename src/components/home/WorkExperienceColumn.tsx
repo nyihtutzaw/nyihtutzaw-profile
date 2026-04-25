@@ -3,6 +3,7 @@
 import { workExperienceData } from "@/data/experience";
 import { useState } from "react";
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { formatPeriod } from '@/utils/dateUtils';
 
 const WorkExperienceColumn = () => {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
@@ -32,7 +33,7 @@ const WorkExperienceColumn = () => {
                 />
               </div>
               <div className="flex-1">
-                <div className="text-sm text-myColor-500 dark:text-myColor-300 font-semibold">{experience.period}</div>
+                <div className="text-sm text-myColor-500 dark:text-myColor-300 font-semibold">{formatPeriod(experience.startDate, experience.endDate)}</div>
                 <h3 className="text-xl font-bold mb-1">{experience.title}</h3>
                 <p className="text-gray-600 dark:text-gray-300">{experience.company}</p>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">

@@ -1,3 +1,4 @@
+import { formatPeriod } from '@/utils/dateUtils';
 
 interface WorkExperience {
     logo: string;
@@ -5,7 +6,8 @@ interface WorkExperience {
     title: string;
     company: string;
     type: string;
-    period: string;
+    startDate: string;
+    endDate: string | null;
     location: string;
     description?: string;
     skills?: string[];
@@ -20,7 +22,8 @@ export const workExperienceData: WorkExperience[] = [
         title: "Senior AI Engineer",
         company: "ArcFusion",
         type: "Full-time",
-        period: `Oct 2024 - Present · 2 mos`,
+        startDate: "Oct 2025",
+        endDate: null,
         location: "Bangkok, Thailand · On-site",
         showInCV: true,
         description: "Senior AI Engineer developing AI agents for consumer brands - optimizing pricing, promotions, and assortment for revenue growth.",
@@ -29,7 +32,7 @@ export const workExperienceData: WorkExperience[] = [
          <div class="space-y-4">
   <p>Senior AI Engineer at Sciemo (AI built for consumer brands) developing AI agents for Revenue Growth Management. Building intelligent automation for trade spend optimization, pricing, promotion calendars, assortment, and demand forecasting for consumer goods brands.</p>
 
-<div class="space-y-3">
+  <div class="space-y-3">
     <h4 class="font-semibold text-lg">Key Responsibilities</h4>
     <ul class="list-disc pl-5 space-y-2">
       <li>Develop and maintain AI agents for Revenue Growth Management (Trade, Pricing, Promotion, Assortment, Forecast)</li>
@@ -64,7 +67,8 @@ export const workExperienceData: WorkExperience[] = [
         title: "Senior Full Stack Engineer",
         company: "RV Connex",
         type: "Full-time",
-        period: `Sep 2024 - Sep 2025 · 1 yr 1 mos`,
+        startDate: "Sep 2024",
+        endDate: "Sep 2025",
         location: "Pathum Thani, Thailand · On-site",
         showInCV: true,
         description: "Senior Full Stack Engineer leading development of AI-powered cybersecurity platform, coordinating cross-functional teams to deliver comprehensive security solutions with data pipelines, automated investigation systems, and mobile applications.",
@@ -106,9 +110,10 @@ export const workExperienceData: WorkExperience[] = [
         title: "Senior Full Stack Engineer",
         company: "Magic Box Solutions",
         type: "Full-time",
-        period: "Aug 2023 - Sep 2024 · 1 yr 2 mos",
-        showInCV: true,
+        startDate: "Aug 2023",
+        endDate: "Sep 2024",
         location: "Bangkok, Bangkok City, Thailand",
+        showInCV: true,
         description: "Senior Full Stack Engineer developing robust e-commerce solutions for Japanese brands and global clothing companies using Magento, React, and modern web technologies.",
         skills: ["Magento", "React Native", "React.js", "Node.js", "Amazon Web Services (AWS)", "GitLab"],
         details: `<div class="space-y-4">
@@ -144,10 +149,11 @@ export const workExperienceData: WorkExperience[] = [
     {
         logo: "/work/heymm.jpeg",
         logoAlt: "Hey Myanmar Logo",
-        title: "Software Engineer",
+        title: "Senior Software Engineer",
         company: "Hey Myanmar",
         type: "Contract",
-        period: "Oct 2023 - May 2024 · 8 mos",
+        startDate: "Oct 2023",
+        endDate: "May 2024",
         location: "Online · Remote",
         description: "Senior AI Engineer providing technical expertise for heymyanmar.com platform development using Express.js and cloud technologies.",
         skills: ["Express.js", "PostgreSQL", "MUI", "AWS Elastic Beanstalk"],
@@ -187,7 +193,8 @@ export const workExperienceData: WorkExperience[] = [
         title: "React Developer",
         company: "株式会社Senyou",
         type: "Full-time",
-        period: "Feb 2022 - Jul 2023 · 1 yr 6 mos",
+        startDate: "Feb 2022",
+        endDate: "Jul 2023",
         location: "Remote",
         description: "React Developer building modern web applications for Japanese clients using React.js and TypeScript with focus on performance and user experience.",
         skills: ["React.js", "TypeScript"],
@@ -228,7 +235,8 @@ export const workExperienceData: WorkExperience[] = [
         title: "Software Developer",
         company: "International Union Against Tuberculosis and Lung Disease (The Union), Myanmar Office",
         type: "Full-time",
-        period: "Jan 2019 - Jul 2023 · 4 yrs 7 mos",
+        startDate: "Jan 2019",
+        endDate: "Jul 2023",
         location: "Mandalay, Myanmar",
         description: "Software Developer leading healthcare technology initiatives, developing web and mobile applications for patient data management and disease monitoring systems.",
         skills: ["Containerization", "Bootstrap", "React Native", "PHP", "Redux.js"],
