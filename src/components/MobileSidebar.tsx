@@ -92,7 +92,7 @@ const MobileSidebar = ({ isOpen, onClose }: MobileSidebarProps) => {
                 © 2024 Nyi Htut Zaw
               </p>
               <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
-                Senior Software Engineer
+                Senior AI Engineer
               </p>
             </div>
           </div>

@@ -17,42 +17,42 @@ export const workExperienceData: WorkExperience[] = [
     {
         logo: "/work/arcfusion.png",
         logoAlt: "ArcFusion Logo",
-        title: "Senior Software Engineer",
+        title: "Senior AI Engineer",
         company: "ArcFusion",
         type: "Full-time",
         period: `Oct 2024 - Present · 2 mos`,
         location: "Bangkok, Thailand · On-site",
         showInCV: true,
-        description: "Senior Software Engineer developing cutting-edge Generative AI applications and solutions for enterprise clients.",
-        skills: ["Python", "Golang", "Google Cloud", "Gemini APIs", "OpenAI APIs", "Hugging Face", "LangChain", "LangGraph", "Langfuse"],
+        description: "Senior AI Engineer developing AI agents for consumer brands - optimizing pricing, promotions, and assortment for revenue growth.",
+        skills: ["Python", "Golang", "AWS", "Gemini APIs", "OpenAI APIs", "Hugging Face", "LangChain", "LangGraph", "Langfuse"],
         details: `
          <div class="space-y-4">
-  <p>Senior Software Engineer specializing in Generative AI development at ArcFusion, a leading AI company based in Bangkok. Focused on building innovative AI-powered applications and solutions that leverage cutting-edge machine learning technologies to solve complex business problems.</p>
+  <p>Senior AI Engineer at Sciemo (AI built for consumer brands) developing AI agents for Revenue Growth Management. Building intelligent automation for trade spend optimization, pricing, promotion calendars, assortment, and demand forecasting for consumer goods brands.</p>
 
-  <div class="space-y-3">
-    <h4 class="font-semibold text-lg">Responsibilities</h4>
+<div class="space-y-3">
+    <h4 class="font-semibold text-lg">Key Responsibilities</h4>
     <ul class="list-disc pl-5 space-y-2">
-      <li>Develop and deploy Generative AI applications using Python and Golang for high-performance solutions</li>
-      <li>Design and implement AI-powered solutions leveraging Google Cloud infrastructure for scalability</li>
-      <li>Utilize LangChain and LangGraph for building complex AI workflows and agent-based systems</li>
-      <li>Integrate Gemini APIs and OpenAI APIs for advanced natural language processing and generation tasks</li>
-      <li>Implement Hugging Face models for custom AI applications and fine-tuning</li>
-      <li>Build scalable backend services using Golang for AI model serving and API endpoints</li>
-      <li>Deploy and manage AI applications on Google Cloud Platform ensuring high availability</li>
-      <li>Implement Langfuse for monitoring and observability of AI applications and model performance</li>
-      <li>Optimize AI model performance and implement efficient inference pipelines</li>
-      <li>Collaborate with cross-functional teams including data scientists and product managers</li>
+      <li>Develop and maintain AI agents for Revenue Growth Management (Trade, Pricing, Promotion, Assortment, Forecast)</li>
+      <li>Build AI automation for promotion optimization - simulate outcomes, monitor performance, optimize trade spend</li>
+      <li>Implement pricing agents using cross elasticities and competitive dynamics modeling</li>
+      <li>Create assortment optimization agents for SKU rationalization and regional localization</li>
+      <li>Build demand forecasting agents unifying consumer signals and market trends</li>
+      <li>Design and implement AI agent frameworks using LangChain and LangGraph</li>
+      <li>Create CI/CD pipelines for multi-tenant client deployments on AWS ensuring scalability and isolation</li>
+      <li>Integrate with BluePlanner for unified promotion management</li>
+      <li>Develop and deploy Generative AI applications using Python and Golang on AWS (ECS, Lambda, SageMaker)</li>
+      <li>Implement Langfuse for monitoring and observability of AI applications</li>
     </ul>
   </div>
 
   <div class="space-y-3">
-    <h4 class="font-semibold text-lg">Achievements</h4>
+    <h4 class="font-semibold text-lg">Key Achievements</h4>
     <ul class="list-disc pl-5 space-y-2">
-      <li>Currently developing DataStory - a cutting-edge Generative AI application for enterprise data analysis and insights</li>
-      <li>Implementing advanced AI workflows using LangChain and LangGraph for complex data processing pipelines</li>
-      <li>Integrating Gemini and OpenAI APIs to power intelligent data storytelling and visualization features</li>
-      <li>Building scalable backend services with Golang to handle large-scale data processing and AI model serving</li>
-      <li>Deploying and optimizing the application on Google Cloud Platform for enterprise-level performance</li>
+      <li>Built AI agents for trade spend optimization reducing wasted promotions</li>
+      <li>Developed promotion optimization agents with outcome simulation capabilities</li>
+      <li>Implemented CI/CD pipelines for multi-tenant SaaS deployments on AWS</li>
+      <li>Integrated BluePlanner for seamless promotion management across channels</li>
+      <li>Deployed scalable AI services on AWS (ECS, SageMaker, Lambda)</li>
     </ul>
   </div>
 </div>
@@ -149,10 +149,10 @@ export const workExperienceData: WorkExperience[] = [
         type: "Contract",
         period: "Oct 2023 - May 2024 · 8 mos",
         location: "Online · Remote",
-        description: "Senior Software Engineer providing technical expertise for heymyanmar.com platform development using Express.js and cloud technologies.",
+        description: "Senior AI Engineer providing technical expertise for heymyanmar.com platform development using Express.js and cloud technologies.",
         skills: ["Express.js", "PostgreSQL", "MUI", "AWS Elastic Beanstalk"],
         details: `<div class="space-y-4">
-        <p>Senior Software Engineer contracted to develop and enhance the heymyanmar.com platform. Focused on building scalable web applications with modern JavaScript stack, implementing robust backend services, and ensuring optimal deployment on AWS cloud infrastructure.</p>
+        <p>Senior AI Engineer contracted to develop and enhance the heymyanmar.com platform. Focused on building scalable web applications with modern JavaScript stack, implementing robust backend services, and ensuring optimal deployment on AWS cloud infrastructure.</p>
         
         <div class="space-y-3">
           <h4 class="font-semibold text-lg">Responsibilities</h4>

@@ -64,10 +64,10 @@ const AboutSection = () => {
       icon: LightBulbIcon,
       color: 'from-red-500 to-red-600'
     },
-    {
+{
       year: '2024-Present',
-      title: 'AI-Powered Future',
-      description: 'Senior Software Engineer at ArcFusion, developing cutting-edge Generative AI applications using Python, Golang, and modern cloud technologies.',
+      title: 'AI Agents for Consumer Brands',
+      description: 'Developing AI agents for Revenue Growth Management at Sciemo - optimizing pricing, promotions, assortment, and demand forecasting for consumer goods brands.',
       icon: RocketLaunchIcon,
       color: 'from-indigo-500 to-indigo-600'
     }
@@ -102,7 +102,7 @@ const AboutSection = () => {
             About My Journey
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed px-4">
-            From a passionate developer teaching programming to a Senior Software Engineer shaping the future of AI. 
+            From a passionate developer teaching programming to a Senior AI Engineer shaping the future of AI. 
             My journey is driven by curiosity, innovation, and the pursuit of excellence in every line of code.
           </p>
         </div>

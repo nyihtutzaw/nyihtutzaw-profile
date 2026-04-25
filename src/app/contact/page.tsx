@@ -103,7 +103,7 @@ export default function ContactPage() {
                 />
               </div>
               <p className="text-center text-gray-600 dark:text-gray-300">
-                Senior Software Engineer specializing in AI development and full-stack solutions.
+                Senior AI Engineer specializing in AI development and full-stack solutions.
                 Always open to discussing new opportunities and interesting projects.
               </p>
             </div>
