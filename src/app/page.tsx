@@ -1,5 +1,5 @@
 import Layout from '@/components/Layout';
-import HeroSection from '@/components/home/HeroSection';
+import HeroSectionServer from '@/components/home/HeroSectionServer';
 import Link from 'next/link';
 import { 
   UserIcon, 
@@ -55,7 +55,7 @@ export default function Home() {
     <Layout>
       <div className="space-y-16">
         {/* Hero Section */}
-        <HeroSection />
+        <HeroSectionServer />
 
         {/* Quick Navigation */}
         <section className="py-16">

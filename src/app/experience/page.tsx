@@ -1,5 +1,5 @@
 import Layout from '@/components/Layout';
-import EducationExperienceSection from '@/components/home/EducationExperienceSection';
+import ExperienceSectionServer from '@/components/home/ExperienceSectionServer';
 
 export default function ExperiencePage() {
   return (
@@ -9,10 +9,10 @@ export default function ExperiencePage() {
           Work Experience
         </h1>
         <p className="text-lg text-gray-600 dark:text-gray-300">
-          My professional journey and the companies I've worked with.
+          My professional journey and the companies I&apos;ve worked with.
         </p>
       </div>
-      <EducationExperienceSection />
+      <ExperienceSectionServer />
     </Layout>
   );
 }

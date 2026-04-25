@@ -1,5 +1,5 @@
 import Layout from '@/components/Layout';
-import SkillsSection from '@/components/home/SkillsSection';
+import SkillsSectionServer from '@/components/home/SkillsSectionServer';
 
 export default function SkillsPage() {
   return (
@@ -12,7 +12,7 @@ export default function SkillsPage() {
           My technical expertise and the technologies I work with.
         </p>
       </div>
-      <SkillsSection />
+      <SkillsSectionServer />
     </Layout>
   );
 }

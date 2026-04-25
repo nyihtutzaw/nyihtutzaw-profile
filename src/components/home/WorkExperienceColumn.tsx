@@ -3,6 +3,7 @@
 import { workExperienceData } from "@/data/experience";
 import { useState } from "react";
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import MarkdownContent from '@/components/ui/MarkdownContent';
 
 const WorkExperienceColumn = () => {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
@@ -69,10 +70,9 @@ const WorkExperienceColumn = () => {
             </div>
             {expandedIndex === index && experience.details && (
               <div className="mt-4 pl-20">
-                <div 
-                  className="border-l-2 border-myColor-500 pl-4 space-y-2"
-                  dangerouslySetInnerHTML={{ __html: experience.details }}
-                />
+                <div className="border-l-2 border-myColor-500 pl-4 space-y-2">
+                  <MarkdownContent content={experience.details} />
+                </div>
               </div>
             )}
           </div>
