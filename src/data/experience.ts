@@ -27,10 +27,10 @@ export const workExperienceData: WorkExperience[] = [
         location: "Bangkok, Thailand · On-site",
         showInCV: true,
         description: "Senior AI Engineer developing AI agents for consumer brands - optimizing pricing, promotions, and assortment for revenue growth.",
-        skills: ["Python", "Golang", "AWS", "Gemini APIs", "OpenAI APIs", "Hugging Face", "LangChain", "LangGraph", "Langfuse"],
+        skills: ["Python", "Golang", "AWS", "Gemini APIs", "OpenAI APIs", "Hugging Face", "LangChain", "LangGraph", "Langfuse", "Browser Automation (Playwright)"],
         details: `
          <div class="space-y-4">
-  <p>Senior AI Engineer at Sciemo (AI built for consumer brands) developing AI agents for Revenue Growth Management. Building intelligent automation for trade spend optimization, pricing, promotion calendars, assortment, and demand forecasting for consumer goods brands.</p>
+  <p>Senior AI Engineer at ArcFusion, delivering AI solutions for a US-based consumer goods client. Building AI agents for Revenue Growth Management - intelligent automation for trade spend optimization, pricing, promotion calendars, assortment, and demand forecasting for consumer goods brands.</p>
 
   <div class="space-y-3">
     <h4 class="font-semibold text-lg">Key Responsibilities</h4>
@@ -42,7 +42,7 @@ export const workExperienceData: WorkExperience[] = [
       <li>Build demand forecasting agents unifying consumer signals and market trends</li>
       <li>Design and implement AI agent frameworks using LangChain and LangGraph</li>
       <li>Create CI/CD pipelines for multi-tenant client deployments on AWS ensuring scalability and isolation</li>
-      <li>Integrate with BluePlanner for unified promotion management</li>
+      <li>Build browser automation (Playwright) to integrate AI agents with third-party trade and promotion planning systems</li>
       <li>Develop and deploy Generative AI applications using Python and Golang on AWS (ECS, Lambda, SageMaker)</li>
       <li>Implement Langfuse for monitoring and observability of AI applications</li>
     </ul>
@@ -51,11 +51,9 @@ export const workExperienceData: WorkExperience[] = [
   <div class="space-y-3">
     <h4 class="font-semibold text-lg">Key Achievements</h4>
     <ul class="list-disc pl-5 space-y-2">
-      <li>Built AI agents for trade spend optimization reducing wasted promotions</li>
-      <li>Developed promotion optimization agents with outcome simulation capabilities</li>
-      <li>Implemented CI/CD pipelines for multi-tenant SaaS deployments on AWS</li>
-      <li>Integrated BluePlanner for seamless promotion management across channels</li>
-      <li>Deployed scalable AI services on AWS (ECS, SageMaker, Lambda)</li>
+      <li>Built browser automation to integrate AI agents with BluePlanner - a cloud-based Trade Promotion Management platform for consumer goods brands - enabling automated, seamless promotion management across channels</li>
+      <li>Delivered AI agents for trade spend optimization that reduce wasted promotional spend through outcome simulation</li>
+      <li>Stood up isolated multi-tenant client environments on AWS, enabling secure onboarding of new brands without cross-tenant risk</li>
     </ul>
   </div>
 </div>
@@ -95,10 +93,9 @@ export const workExperienceData: WorkExperience[] = [
   <div class="space-y-3">
     <h4 class="font-semibold text-lg">Key Achievements</h4>
     <ul class="list-disc pl-5 space-y-2">
-      <li>Successfully integrated multiple security data sources into a unified platform.</li>
-      <li>Implemented real-time alert processing system handling thousands of security events.</li>
-      <li>Developed mobile application framework for secure access to the platform.</li>
-      <li>Established efficient workflow between SOC analysts and AI-powered investigation system.</li>
+      <li>Unified previously siloed security data sources into a single platform, giving SOC analysts one source of truth.</li>
+      <li>Delivered a real-time alert processing system handling thousands of security events per day.</li>
+      <li>Streamlined the SOC-to-AI investigation handoff, cutting manual triage effort for analysts.</li>
     </ul>
   </div>
 </div>

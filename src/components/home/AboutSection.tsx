@@ -67,7 +67,7 @@ const AboutSection = () => {
 {
       year: '2024-Present',
       title: 'AI Agents for Consumer Brands',
-      description: 'Developing AI agents for Revenue Growth Management at Sciemo - optimizing pricing, promotions, assortment, and demand forecasting for consumer goods brands.',
+      description: 'Developing AI agents for Revenue Growth Management at ArcFusion for a US-based consumer goods client - optimizing pricing, promotions, assortment, and demand forecasting for consumer goods brands.',
       icon: RocketLaunchIcon,
       color: 'from-indigo-500 to-indigo-600'
     }
