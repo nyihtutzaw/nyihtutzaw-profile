@@ -58,7 +58,7 @@ export const generateCV = () => {
     // Get dynamic portfolio URL
     const portfolioUrl = typeof window !== 'undefined' 
       ? `${window.location.origin}` 
-      : 'https://nyihtutzaw.github.io';
+      : 'zaw27.com';
     
     addText('Email: nyihtutzaw.2015@gmail.com', 10, false, lineHeight, rightColumnX);
     addText('Phone: +66 92 540 2997', 10, false, lineHeight, rightColumnX);
@@ -182,4 +182,104 @@ export const generateCV = () => {
 
     // Save the PDF
     doc.save('NyiHtutZaw_CV.pdf');
+};
+
+/**
+ * Render a Markdown CV (as produced/edited in the admin CV Adjustment tool) to a
+ * PDF. Supports the subset of Markdown used by the CV: `#`/`##`/`###` headings,
+ * `- ` bullets, `**bold**` inline emphasis and `**Label:**` lead-in lines.
+ */
+export const generateCVFromMarkdown = (markdown: string, filename = 'NyiHtutZaw_CV.pdf') => {
+    const doc = new jsPDF();
+    let yPos = 20;
+    const lineHeight = 7;
+    const margin = 20;
+    const pageWidth = 210;
+    const contentWidth = pageWidth - margin * 2;
+    const pageHeight = 297;
+    const maxY = pageHeight - margin;
+
+    const stripBold = (text: string) => text.replace(/\*\*/g, '');
+
+    const addText = (
+        text: string,
+        size = 12,
+        isBold = false,
+        customLineHeight?: number,
+        xPosition = margin
+    ) => {
+        doc.setFontSize(size);
+        doc.setFont('helvetica', isBold ? 'bold' : 'normal');
+        const lines = doc.splitTextToSize(text, contentWidth);
+        if (yPos + lines.length * (customLineHeight || lineHeight) > maxY) {
+            doc.addPage();
+            yPos = margin;
+        }
+        doc.text(lines, xPosition, yPos, { align: 'left' });
+        yPos += lines.length * (customLineHeight || lineHeight);
+    };
+
+    const addSection = (title: string) => {
+        if (yPos + 20 > maxY) {
+            doc.addPage();
+            yPos = margin;
+        }
+        yPos += 5;
+        addText(title.toUpperCase(), 14, true);
+        yPos += 3;
+        doc.setDrawColor(0);
+        doc.line(margin, yPos, pageWidth - margin, yPos);
+        yPos += 5;
+    };
+
+    const rawLines = markdown.replace(/\r\n/g, '\n').split('\n');
+
+    rawLines.forEach((raw) => {
+        const line = raw.trimEnd();
+        const trimmed = line.trim();
+
+        if (trimmed === '') {
+            yPos += 3;
+            return;
+        }
+
+        // Main name/title
+        if (trimmed.startsWith('# ')) {
+            addText(stripBold(trimmed.slice(2)).toUpperCase(), 20, true);
+            return;
+        }
+        // Section header
+        if (trimmed.startsWith('## ')) {
+            addSection(stripBold(trimmed.slice(3)));
+            return;
+        }
+        // Sub-header (job title / degree)
+        if (trimmed.startsWith('### ')) {
+            yPos += 3;
+            addText(stripBold(trimmed.slice(4)).toUpperCase(), 12, true);
+            return;
+        }
+        // Bullet
+        if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+            addText(`• ${stripBold(trimmed.slice(2))}`, 9, false, 5);
+            return;
+        }
+        // "**Label:** rest" lead-in line
+        const labelMatch = trimmed.match(/^\*\*(.+?):\*\*\s*(.*)$/);
+        if (labelMatch) {
+            addText(`${labelMatch[1]}:`, 10, true, 5);
+            if (labelMatch[2]) addText(stripBold(labelMatch[2]), 9, false, 5);
+            return;
+        }
+        // Fully bold line
+        if (/^\*\*.+\*\*$/.test(trimmed)) {
+            addText(stripBold(trimmed), 10, true, 5);
+            return;
+        }
+
+        // Normal paragraph text
+        addText(stripBold(trimmed), 10, false, 5);
+    });
+
+    doc.save(filename);
 };
