@@ -81,8 +81,8 @@ export const skillGroups: SkillGroup[] = [
     name: 'Web3',
     skills: [
       { name: 'Solidity', logo: '/skills/solidity.png' },
-      { name: 'Hardhat', logo: '/skills/hardhat.png' },
-      { name: 'Truffle', logo: '/skills/truffle.png' },
+      { name: 'Hardhat', logo: '/skills/Hardhat.png' },
+      { name: 'Truffle', logo: '/skills/Truffle.png' },
       { name: 'Web3.js', logo: '/skills/web3js.png' },
       { name: 'Ethers.js', logo: '/skills/etherjs.png' },
       { name: 'MetaMask', logo: '/skills/metamask.png' },

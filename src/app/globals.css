@@ -2,20 +2,182 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Design tokens — RGB triplets so Tailwind opacity modifiers work (bg-surface/60) */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: 248 247 244;
+  --surface: 255 255 255;
+  --surface-2: 241 240 236;
+  --line: 226 224 218;
+  --fg: 20 20 28;
+  --muted: 100 100 112;
+  --primary: 79 70 229;
+  --primary-fg: 255 255 255;
+  --accent: 14 165 233;
+  --success: 22 163 74;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.dark {
+  --bg: 10 10 15;
+  --surface: 20 20 29;
+  --surface-2: 28 28 40;
+  --line: 42 42 58;
+  --fg: 238 238 245;
+  --muted: 150 150 168;
+  --primary: 129 140 248;
+  --primary-fg: 10 10 15;
+  --accent: 56 189 248;
+  --success: 74 222 128;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-bg text-fg font-sans antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight;
+  }
+  ::selection {
+    background: rgb(var(--primary) / 0.25);
+  }
+  :focus-visible {
+    outline: 2px solid rgb(var(--primary));
+    outline-offset: 3px;
+    border-radius: 6px;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(110deg, rgb(var(--primary)), rgb(var(--accent)));
+  }
+  .card {
+    @apply rounded-2xl border border-line bg-surface;
+  }
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.18em] text-primary;
+  }
+  .chip {
+    @apply inline-flex items-center rounded-full border border-line bg-surface-2 px-2.5 py-1 text-xs font-medium text-muted;
+  }
+}
+
+/* Reveal-on-scroll (see components/ui/Reveal) */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Cursor spotlight on cards (see components/ui/SpotlightCard) */
+.spotlight {
+  position: relative;
+  overflow: hidden;
+}
+.spotlight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    360px circle at var(--mx, 50%) var(--my, 50%),
+    rgb(var(--primary) / 0.14),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+/* Marquee */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee 38s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Skeleton shimmer */
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgb(var(--surface-2)) 25%,
+    rgb(var(--line)) 50%,
+    rgb(var(--surface-2)) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+/* Page enter */
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.page-in {
+  animation: page-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* Rich text injected from data/experience.ts */
+.rich h4 {
+  @apply mt-5 mb-2 text-base font-semibold text-fg;
+}
+.rich p {
+  @apply leading-relaxed text-muted;
+}
+.rich ul {
+  @apply list-disc space-y-2 pl-5 marker:text-primary;
+}
+.rich li {
+  @apply leading-relaxed text-muted;
 }

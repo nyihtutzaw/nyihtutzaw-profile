@@ -47,7 +47,7 @@ export const generateCV = () => {
     const initialYPos = yPos;
     // Left column - Name and Title
     addText('NYI HTUT ZAW', 20, true);
-    addText('Senior AI Engineer', 14, true);
+    addText('Senior Full-Stack & AI Engineer', 14, true);
     addText('Generative AI | Full-Stack Development | Cloud Architecture', 10);
     addText('Bangkok, Thailand (Open to Remote/Hybrid)', 10);
 

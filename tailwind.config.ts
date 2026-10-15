@@ -1,15 +1,33 @@
 import type { Config } from "tailwindcss";
 
+const token = (name: string) => `rgb(var(--${name}) / <alpha-value>)`;
+
 export default {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/data/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: 'class', // Add this line
+  darkMode: 'class',
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-display)', 'var(--font-sans)', 'sans-serif'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
+      },
       colors: {
+        bg: token('bg'),
+        surface: token('surface'),
+        'surface-2': token('surface-2'),
+        line: token('line'),
+        fg: token('fg'),
+        muted: token('muted'),
+        primary: token('primary'),
+        'primary-fg': token('primary-fg'),
+        accent: token('accent'),
+        success: token('success'),
         myColor: {
           "50": "#e8e8f4",
           "100": "#d0d1ea",

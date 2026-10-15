@@ -1,85 +1,84 @@
 'use client';
 
-import { workExperienceData } from "@/data/experience";
-import { useState } from "react";
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { useState } from 'react';
+import Image from 'next/image';
+import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import { workExperienceData } from '@/data/experience';
 import { formatPeriod } from '@/utils/dateUtils';
+import Reveal from '@/components/ui/Reveal';
 
 const WorkExperienceColumn = () => {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-  const { ref, isVisible } = useScrollAnimation();
-
-  const toggleDetails = (index: number) => {
-    setExpandedIndex(expandedIndex === index ? null : index);
-  };
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <div ref={ref}>
-      <div className={`space-y-8 transition-all duration-1000 transform ${
-        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-      }`}>
-        {workExperienceData.map((experience, index) => (
-          <div 
-            key={index} 
-            className="flex flex-col bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
-            style={{ transitionDelay: `${index * 100}ms` }}
-          >
-            <div className="flex items-start space-x-4">
-              <div className="w-16 h-16 flex-shrink-0">
-                <img
-                  src={experience.logo}
-                  alt={experience.logoAlt}
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <div className="flex-1">
-                <div className="text-sm text-myColor-500 dark:text-myColor-300 font-semibold">{formatPeriod(experience.startDate, experience.endDate)}</div>
-                <h3 className="text-xl font-bold mb-1">{experience.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{experience.company}</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                  {experience.type} · {experience.location}
-                </p>
-                {experience.description && (
-                  <p className="text-gray-600 dark:text-gray-300 mt-2">
-                    {experience.description}
-                  </p>
-                )}
-                {experience.skills && (
-                  <div className="mt-3">
-                    <div className="flex flex-wrap gap-2">
-                      {experience.skills.map((skill, skillIndex) => (
-                        <span 
-                          key={skillIndex}
-                          className="text-xs bg-myColor-100 text-myColor-700 dark:bg-myColor-800 dark:text-myColor-200 px-2 py-1 rounded"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
+    <ol className="relative space-y-6 border-l border-line pl-6 sm:pl-10">
+      {workExperienceData.map((exp, index) => {
+        const isOpen = openIndex === index;
+        const isCurrent = exp.endDate === null;
+        return (
+          <li key={`${exp.company}-${exp.startDate}`} className="relative">
+            <span
+              className={`absolute -left-[31px] top-7 flex h-4 w-4 items-center justify-center rounded-full border-2 sm:-left-[47px] ${
+                isCurrent ? 'border-primary bg-primary shadow-lg shadow-primary/40' : 'border-line bg-bg'
+              }`}
+              aria-hidden="true"
+            />
+            <Reveal delay={index * 50}>
+              <article className="card p-5 transition-colors hover:border-primary/30 sm:p-6">
+                <div className="flex items-start gap-4">
+                  <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl border border-line bg-white">
+                    <Image src={exp.logo} alt={exp.logoAlt} fill sizes="56px" className="object-contain p-1.5" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="font-mono text-xs text-primary">{formatPeriod(exp.startDate, exp.endDate)}</p>
+                    <h3 className="mt-1 text-xl font-semibold text-fg">{exp.title}</h3>
+                    <p className="text-muted">{exp.company.split(' (')[0]}</p>
+                    <p className="mt-0.5 text-sm text-muted/80">
+                      {exp.type} · {exp.location}
+                    </p>
+                  </div>
+                  {isCurrent && (
+                    <span className="chip hidden !border-success/30 !bg-success/10 !text-success sm:inline-flex">Current</span>
+                  )}
+                </div>
+
+                {exp.description && <p className="mt-4 leading-relaxed text-muted">{exp.description}</p>}
+
+                {exp.skills && (
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {exp.skills.map((skill) => (
+                      <span key={skill} className="chip">{skill}</span>
+                    ))}
                   </div>
                 )}
-                {experience.details && (
-                  <button
-                    onClick={() => toggleDetails(index)}
-                    className="mt-4 px-4 py-2 bg-myColor-500 text-white rounded-md hover:bg-myColor-600 transition-colors"
-                  >
-                    {expandedIndex === index ? 'Hide Details' : 'View Details'}
-                  </button>
+
+                {exp.details && (
+                  <>
+                    <button
+                      onClick={() => setOpenIndex(isOpen ? null : index)}
+                      aria-expanded={isOpen}
+                      aria-controls={`exp-details-${index}`}
+                      className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+                    >
+                      {isOpen ? 'Hide details' : 'View details'}
+                      <ChevronDownIcon className={`h-4 w-4 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    <div
+                      id={`exp-details-${index}`}
+                      className={`grid transition-all duration-500 ease-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
+                    >
+                      <div className="overflow-hidden">
+                        <div className="rich mt-4 border-t border-line pt-4" dangerouslySetInnerHTML={{ __html: exp.details }} />
+                      </div>
+                    </div>
+                  </>
                 )}
-              </div>
-            </div>
-            {expandedIndex === index && experience.details && (
-              <div className="mt-4 pl-20">
-                <div 
-                  className="border-l-2 border-myColor-500 pl-4 space-y-2"
-                  dangerouslySetInnerHTML={{ __html: experience.details }}
-                />
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
+              </article>
+            </Reveal>
+          </li>
+        );
+      })}
+    </ol>
   );
 };
 

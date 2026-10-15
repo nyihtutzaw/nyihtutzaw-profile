@@ -112,7 +112,7 @@ function RichText({ text }: { text: string }) {
       <Link
         key={`l${key++}`}
         href={href}
-        className="text-blue-600 dark:text-blue-400 underline underline-offset-2 hover:text-blue-700 dark:hover:text-blue-300"
+        className="text-primary underline underline-offset-2 hover:opacity-80"
       >
         {label}
       </Link>
@@ -144,6 +144,13 @@ export default function ChatWidget() {
     const nav = navigator.language?.toLowerCase() ?? '';
     if (nav.startsWith('my')) setLang('my');
     setUsed(readQuota());
+  }, []);
+
+  // Let other parts of the site (e.g. the hero) open the chat.
+  useEffect(() => {
+    const onOpen = () => setOpen(true);
+    window.addEventListener('open-chat', onOpen);
+    return () => window.removeEventListener('open-chat', onOpen);
   }, []);
 
   // Auto-scroll to the newest message.
@@ -220,7 +227,7 @@ export default function ChatWidget() {
       <button
         onClick={() => setOpen((o) => !o)}
         aria-label={open ? t.close : t.open}
-        className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-purple-600 text-white shadow-lg transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent text-primary-fg shadow-lg shadow-primary/30 transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary"
       >
         {open ? (
           <XMarkIcon className="h-6 w-6" />
@@ -231,12 +238,12 @@ export default function ChatWidget() {
 
       {/* Chat panel */}
       {open && (
-        <div className="fixed bottom-24 right-5 z-50 flex h-[32rem] max-h-[calc(100vh-7rem)] w-[22rem] max-w-[calc(100vw-2.5rem)] flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl dark:border-gray-700 dark:bg-gray-800">
+        <div className="fixed bottom-24 right-5 z-50 flex h-[32rem] max-h-[calc(100vh-7rem)] w-[22rem] max-w-[calc(100vw-2.5rem)] flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-2xl">
           {/* Header */}
-          <div className="flex items-center justify-between bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-3 text-white">
+          <div className="flex items-center justify-between bg-gradient-to-r from-primary to-accent px-4 py-3 text-primary-fg">
             <div>
               <p className="text-sm font-semibold leading-tight">{t.title}</p>
-              <p className="text-xs text-blue-100">{t.subtitle}</p>
+              <p className="text-xs opacity-80">{t.subtitle}</p>
             </div>
             <button
               onClick={() => setLang((l) => (l === 'en' ? 'my' : 'en'))}
@@ -251,7 +258,7 @@ export default function ChatWidget() {
           <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto px-4 py-3">
             {/* Local greeting (not sent to the API, not counted) */}
             <div className="flex justify-start">
-              <div className="max-w-[85%] rounded-2xl rounded-tl-sm bg-gray-100 px-3 py-2 text-sm text-gray-800 dark:bg-gray-700 dark:text-gray-100">
+              <div className="max-w-[85%] rounded-2xl rounded-tl-sm bg-surface-2 px-3 py-2 text-sm text-fg">
                 {t.greeting}
               </div>
             </div>
@@ -261,7 +268,7 @@ export default function ChatWidget() {
                 return (
                   <p
                     key={i}
-                    className="mx-auto max-w-[90%] text-center text-xs italic text-gray-500 dark:text-gray-400"
+                    className="mx-auto max-w-[90%] text-center text-xs italic text-muted"
                   >
                     {m.content}
                   </p>
@@ -273,8 +280,8 @@ export default function ChatWidget() {
                   <div
                     className={`max-w-[85%] px-3 py-2 text-sm ${
                       isUser
-                        ? 'rounded-2xl rounded-tr-sm bg-blue-600 text-white'
-                        : 'rounded-2xl rounded-tl-sm bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-100'
+                        ? 'rounded-2xl rounded-tr-sm bg-primary text-primary-fg'
+                        : 'rounded-2xl rounded-tl-sm bg-surface-2 text-fg'
                     }`}
                   >
                     {isUser ? (
@@ -289,7 +296,7 @@ export default function ChatWidget() {
 
             {loading && (
               <div className="flex justify-start">
-                <div className="rounded-2xl rounded-tl-sm bg-gray-100 px-3 py-2 text-sm text-gray-500 dark:bg-gray-700 dark:text-gray-300">
+                <div className="rounded-2xl rounded-tl-sm bg-surface-2 px-3 py-2 text-sm text-muted">
                   {t.thinking}
                 </div>
               </div>
@@ -297,9 +304,9 @@ export default function ChatWidget() {
           </div>
 
           {/* Footer / input */}
-          <div className="border-t border-gray-200 px-3 py-2 dark:border-gray-700">
+          <div className="border-t border-line px-3 py-2">
             {limitReached ? (
-              <p className="px-1 py-2 text-center text-xs text-gray-500 dark:text-gray-400">
+              <p className="px-1 py-2 text-center text-xs text-muted">
                 {t.limitReached}
               </p>
             ) : (
@@ -312,18 +319,18 @@ export default function ChatWidget() {
                     onFocus={resetInactivity}
                     rows={1}
                     placeholder={t.placeholder}
-                    className="max-h-24 flex-1 resize-none rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:outline-none dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100"
+                    className="max-h-24 flex-1 resize-none rounded-lg border border-line bg-bg px-3 py-2 text-sm text-fg placeholder:text-muted focus:border-primary focus:outline-none"
                   />
                   <button
                     onClick={send}
                     disabled={loading || !input.trim()}
                     aria-label={t.send}
-                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-40"
+                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-fg transition-colors hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
                   >
                     <PaperAirplaneIcon className="h-5 w-5" />
                   </button>
                 </div>
-                <p className="mt-1 px-1 text-right text-[11px] text-gray-400 dark:text-gray-500">
+                <p className="mt-1 px-1 text-right text-[11px] text-muted">
                   {remaining} {t.remaining}
                 </p>
               </>

@@ -23,7 +23,7 @@ export function buildCVMarkdown(): string {
 
   // Header
   lines.push('# NYI HTUT ZAW');
-  lines.push('## Senior AI Engineer');
+  lines.push('## Senior Full-Stack & AI Engineer');
   lines.push('Generative AI | Full-Stack Development | Cloud Architecture');
   lines.push('Bangkok, Thailand (Open to Remote/Hybrid)');
   lines.push('');

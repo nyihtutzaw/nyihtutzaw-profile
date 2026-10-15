@@ -1,39 +1,138 @@
-'use client';
+"use client";
 
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import { allProjects, projectCategories } from "@/data/projects";
+import { formatPeriod } from "@/utils/dateUtils";
+import Reveal from "@/components/ui/Reveal";
+import SpotlightCard from "@/components/ui/SpotlightCard";
 
 const ProjectShowcase = () => {
-  const { ref, isVisible } = useScrollAnimation();
+  const [filter, setFilter] =
+    useState<(typeof projectCategories)[number]>("All");
+  const visible = allProjects.filter(
+    (p) => filter === "All" || p.category === filter,
+  );
 
   return (
-    <section ref={ref} className="py-16 px-4">
-      <div className="max-w-6xl mx-auto">   
-        <div className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg p-12 transition-all duration-1000 transform ${
-          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-        }`}>
-          <div className="flex flex-col items-center justify-center space-y-6 text-center">
-            <div className="w-24 h-24 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                className="h-12 w-12 text-blue-600 dark:text-blue-400" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke="currentColor"
-              >
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
-                  d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" 
-                />
-              </svg>
-            </div>
-            <h3 className="text-2xl font-semibold">COMING SOON</h3>
-            <p className="text-gray-600 dark:text-gray-300 max-w-md">
-              Exciting projects are being prepared for showcase. Stay tuned for updates on my latest work and contributions.
-            </p>
-          </div>
+    <section>
+      {projectCategories.length > 2 && (
+        <div
+          className="mb-8 flex flex-wrap gap-2"
+          role="tablist"
+          aria-label="Filter projects"
+        >
+          {projectCategories.map((cat) => (
+            <button
+              key={cat}
+              role="tab"
+              aria-selected={filter === cat}
+              onClick={() => setFilter(cat)}
+              className={`rounded-full border px-4 py-1.5 text-sm font-medium transition-colors ${
+                filter === cat
+                  ? "border-primary bg-primary text-primary-fg"
+                  : "border-line bg-surface text-muted hover:border-primary/50 hover:text-fg"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
         </div>
+      )}
+
+      <div className="grid gap-5 md:grid-cols-2">
+        {visible.map((project, i) => (
+          <Reveal
+            key={project.slug}
+            delay={i * 70}
+            className={
+              project.featured && filter === "All" ? "md:col-span-2" : ""
+            }
+          >
+            <SpotlightCard
+              as={Link}
+              href={`/projects/${project.slug}`}
+              className="group flex h-full flex-col p-6 md:p-8"
+            >
+              {project.thumbnail && (
+                <div className="relative -mx-2 mb-6 aspect-[16/10] overflow-hidden rounded-xl border border-line bg-surface">
+                  <Image
+                    src={project.thumbnail}
+                    alt={`${project.title} preview`}
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                </div>
+              )}
+              <div className="flex items-start gap-4">
+                {project.logo && (
+                  <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl border border-line bg-white">
+                    <Image
+                      src={project.logo}
+                      alt={project.logoAlt ?? ""}
+                      fill
+                      sizes="56px"
+                      className="object-contain p-1.5"
+                    />
+                  </div>
+                )}
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2">
+                    <span className="chip !border-primary/30 !bg-primary/10 !text-primary">
+                      {project.category}
+                    </span>
+                    {project.featured && (
+                      <span className="eyebrow !text-[10px]">Featured</span>
+                    )}
+                  </div>
+                  <p className="mt-2 truncate text-sm text-muted">
+                    {project.role} · {project.org}
+                  </p>
+                </div>
+                <ArrowUpRightIcon className="h-5 w-5 shrink-0 text-muted transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
+              </div>
+
+              <h3 className="mt-5 text-xl font-semibold text-fg md:text-2xl">
+                {project.title}
+              </h3>
+              <p className="mt-2 leading-relaxed text-muted">
+                {project.summary}
+              </p>
+
+              {project.highlights && project.featured && (
+                <ul className="mt-4 space-y-2 text-sm text-muted">
+                  {project.highlights.map((h) => (
+                    <li key={h} className="flex gap-2">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              <div className="mt-auto flex flex-wrap items-center gap-2 pt-6">
+                {project.skills.slice(0, 5).map((s) => (
+                  <span key={s} className="chip">
+                    {s}
+                  </span>
+                ))}
+                {project.startDate && (
+                  <span className="ml-auto font-mono text-xs text-muted">
+                    {
+                      formatPeriod(
+                        project.startDate,
+                        project.endDate ?? null,
+                      ).split(" · ")[0]
+                    }
+                  </span>
+                )}
+              </div>
+            </SpotlightCard>
+          </Reveal>
+        ))}
       </div>
     </section>
   );

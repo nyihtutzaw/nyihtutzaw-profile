@@ -1,17 +1,21 @@
+import type { Metadata } from 'next';
 import Layout from '@/components/Layout';
+import PageHeader from '@/components/ui/PageHeader';
 import ProjectShowcase from '@/components/home/ProjectShowcase';
+
+export const metadata: Metadata = {
+  title: 'Projects',
+  description: 'Business systems for retail and logistics, walked through step by step.',
+};
 
 export default function ProjectsPage() {
   return (
     <Layout>
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-          Projects
-        </h1>
-        <p className="text-lg text-gray-600 dark:text-gray-300">
-          A showcase of my recent work and personal projects.
-        </p>
-      </div>
+      <PageHeader
+        eyebrow="Selected work"
+        title="Projects"
+        description="Business systems I've built for clients: a multi-client point of sale for retail and a logistics platform for freight, each walked through step by step."
+      />
       <ProjectShowcase />
     </Layout>
   );
