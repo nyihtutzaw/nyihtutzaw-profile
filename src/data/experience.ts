@@ -13,6 +13,10 @@ interface WorkExperience {
     skills?: string[];
     details?: string;
     showInCV?: boolean;
+    /** Shorter company name for the CV, when `company` is too long for one line. */
+    cvCompany?: string;
+    /** Curated CV bullets. When omitted, the CV uses the <h4>/<li> groups in `details`. */
+    cvSections?: { heading?: string; bullets: string[] }[];
 }
 
 export const workExperienceData: WorkExperience[] = [
@@ -26,34 +30,38 @@ export const workExperienceData: WorkExperience[] = [
         endDate: null,
         location: "Bangkok, Thailand · On-site",
         showInCV: true,
-        description: "Senior AI Engineer developing AI agents for consumer brands - optimizing pricing, promotions, and assortment for revenue growth.",
-        skills: ["Python", "Golang", "AWS", "Gemini APIs", "OpenAI APIs", "Hugging Face", "LangChain", "LangGraph", "Langfuse", "Browser Automation (Playwright)"],
+        description: "Senior AI Engineer building AI data products and agents: text-to-SQL, multi-tenant cloud platforms and data apps for enterprise clients.",
+        skills: ["Python", "AWS (Fargate, ECS)", "GitHub Actions", "LangChain", "LangGraph", "Langfuse", "Text-to-SQL", "DuckDB", "Databricks", "Spark", "Delta Lake", "Sentry", "PostHog", "Playwright"],
         details: `
-         <div class="space-y-4">
-  <p>Senior AI Engineer at ArcFusion, delivering AI solutions for a US-based consumer goods client. Building AI agents for Revenue Growth Management - intelligent automation for trade spend optimization, pricing, promotion calendars, assortment, and demand forecasting for consumer goods brands.</p>
+<div class="space-y-4">
+  <p>Senior AI Engineer at ArcFusion, working on ArcFusion's own AI product and on client projects. I work across the whole stack: AI agents, cloud infrastructure, backend and frontend.</p>
 
   <div class="space-y-3">
-    <h4 class="font-semibold text-lg">Key Responsibilities</h4>
+    <h4 class="font-semibold text-lg">Customer segmentation platform for a leading Thai retailer</h4>
     <ul class="list-disc pl-5 space-y-2">
-      <li>Develop and maintain AI agents for Revenue Growth Management (Trade, Pricing, Promotion, Assortment, Forecast)</li>
-      <li>Build AI automation for promotion optimization - simulate outcomes, monitor performance, optimize trade spend</li>
-      <li>Implement pricing agents using cross elasticities and competitive dynamics modeling</li>
-      <li>Create assortment optimization agents for SKU rationalization and regional localization</li>
-      <li>Build demand forecasting agents unifying consumer signals and market trends</li>
-      <li>Design and implement AI agent frameworks using LangChain and LangGraph</li>
-      <li>Create CI/CD pipelines for multi-tenant client deployments on AWS ensuring scalability and isolation</li>
-      <li>Build browser automation (Playwright) to integrate AI agents with third-party trade and promotion planning systems</li>
-      <li>Develop and deploy Generative AI applications using Python and Golang on AWS (ECS, Lambda, SageMaker)</li>
-      <li>Implement Langfuse for monitoring and observability of AI applications</li>
+      <li>Set up cloud infrastructure and CI/CD on AWS Fargate with GitHub Actions</li>
+      <li>Added error monitoring with Sentry and web analytics with PostHog</li>
+      <li>Load-tested the AI app and agents to make sure they handle many users at the same time</li>
+      <li>Researched faster ways to process large datasets with DuckDB, Databricks, Spark and Delta Lake</li>
     </ul>
   </div>
 
   <div class="space-y-3">
-    <h4 class="font-semibold text-lg">Key Achievements</h4>
+    <h4 class="font-semibold text-lg">AI assistant for promotion managers (AI startup client)</h4>
     <ul class="list-disc pl-5 space-y-2">
-      <li>Built browser automation to integrate AI agents with BluePlanner - a cloud-based Trade Promotion Management platform for consumer goods brands - enabling automated, seamless promotion management across channels</li>
-      <li>Delivered AI agents for trade spend optimization that reduce wasted promotional spend through outcome simulation</li>
-      <li>Stood up isolated multi-tenant client environments on AWS, enabling secure onboarding of new brands without cross-tenant risk</li>
+      <li>Built multi-tenant AWS infrastructure and CI/CD, giving each of their customers an isolated environment</li>
+      <li>Built a shared authentication service used across all their customers</li>
+      <li>Integrated the assistant with a third-party trade promotion management platform using browser automation</li>
+      <li>Built "chat with your data" over Parquet files using text-to-SQL</li>
+      <li>Frontend work: notifications, Slack integration and performance optimisation</li>
+    </ul>
+  </div>
+
+  <div class="space-y-3">
+    <h4 class="font-semibold text-lg">ArcFusion's data analytics product</h4>
+    <ul class="list-disc pl-5 space-y-2">
+      <li>Worked on the AI agent that lets users chat with their data, create charts and generate data stories</li>
+      <li>Tuned prompts and built evaluations for the text-to-SQL agent to improve answer accuracy</li>
     </ul>
   </div>
 </div>
@@ -69,6 +77,16 @@ export const workExperienceData: WorkExperience[] = [
         endDate: "Sep 2025",
         location: "Pathum Thani, Thailand · On-site",
         showInCV: true,
+        cvSections: [{
+            bullets: [
+                "Led development of an AI-powered cybersecurity platform, coordinating SOC, Customer Success, Data Engineering and AI teams",
+                "Designed data pipelines that unified siloed security alert sources into one platform for SOC analysts",
+                "Delivered a real-time alert processing system for security events",
+                "Integrated AI-driven automated investigation and chatbot features, reducing manual triage for analysts",
+                "Architected the platform's mobile applications and shaped system design for a scalable, secure architecture",
+                "Set up CI/CD with security testing, defined coding standards and mentored engineers"
+            ]
+        }],
         description: "Senior Full Stack Engineer leading development of AI-powered cybersecurity platform, coordinating cross-functional teams to deliver comprehensive security solutions with data pipelines, automated investigation systems, and mobile applications.",
         skills: ["TypeScript", "Python", "Cypher Security", "Redux.js", "Tailwind CSS", "Apollo GraphQL", "monorepo", "XDR", "EDR", "Flowbite"],
         details: `
@@ -109,8 +127,17 @@ export const workExperienceData: WorkExperience[] = [
         type: "Full-time",
         startDate: "Aug 2023",
         endDate: "Sep 2024",
-        location: "Bangkok, Bangkok City, Thailand",
+        location: "Bangkok, Thailand",
         showInCV: true,
+        cvSections: [{
+            bullets: [
+                "Built and maintained Magento e-commerce stores with React frontends for Japanese and global clothing brands",
+                "Led a client's platform migration to a new major version with zero downtime, including custom data migration scripts",
+                "Launched the new platform with multiple payment gateways, including cash on delivery and online payments",
+                "Implemented authentication, checkout, order management and reward point systems",
+                "Set up CI/CD and deployed and monitored applications on AWS"
+            ]
+        }],
         description: "Senior Full Stack Engineer developing robust e-commerce solutions for Japanese brands and global clothing companies using Magento, React, and modern web technologies.",
         skills: ["Magento", "React Native", "React.js", "Node.js", "Amazon Web Services (AWS)", "GitLab"],
         details: `<div class="space-y-4">
@@ -144,91 +171,20 @@ export const workExperienceData: WorkExperience[] = [
       </div>`
     },
     {
-        logo: "/work/heymm.jpeg",
-        logoAlt: "Hey Myanmar Logo",
-        title: "Senior Software Engineer",
-        company: "Hey Myanmar",
-        type: "Contract",
-        startDate: "Oct 2023",
-        endDate: "May 2024",
-        location: "Online · Remote",
-        description: "Senior AI Engineer providing technical expertise for heymyanmar.com platform development using Express.js and cloud technologies.",
-        skills: ["Express.js", "PostgreSQL", "MUI", "AWS Elastic Beanstalk"],
-        details: `<div class="space-y-4">
-        <p>Senior AI Engineer contracted to develop and enhance the heymyanmar.com platform. Focused on building scalable web applications with modern JavaScript stack, implementing robust backend services, and ensuring optimal deployment on AWS cloud infrastructure.</p>
-        
-        <div class="space-y-3">
-          <h4 class="font-semibold text-lg">Responsibilities</h4>
-          <ul class="list-disc pl-5 space-y-2">
-            <li>Develop full-stack web applications using React.js for frontend and Express.js for backend services</li>
-            <li>Design and implement PostgreSQL database schemas for efficient data management</li>
-            <li>Create responsive user interfaces using Material-UI (MUI) component library</li>
-            <li>Build RESTful APIs for data communication between frontend and backend systems</li>
-            <li>Deploy and manage applications on AWS Elastic Beanstalk for scalable hosting</li>
-            <li>Implement authentication and authorization systems for secure user access</li>
-            <li>Optimize application performance and ensure cross-browser compatibility</li>
-            <li>Collaborate with remote team members using agile development methodologies</li>
-          </ul>
-        </div>
-
-        <div class="space-y-3">
-          <h4 class="font-semibold text-lg">Achievements</h4>
-          <ul class="list-disc pl-5 space-y-2">
-            <li>Successfully deployed heymyanmar.com platform on AWS with 99.9% uptime</li>
-            <li>Implemented responsive design improving mobile user engagement by 35%</li>
-            <li>Optimized database queries reducing page load times by 50%</li>
-            <li>Established automated deployment pipeline reducing release time by 70%</li>
-            <li>Created modular component architecture improving code maintainability</li>
-            <li>Integrated third-party APIs enhancing platform functionality and user experience</li>
-          </ul>
-        </div>
-      </div>`
-    },
-    {
-        logo: "/work/senyou.jpeg",
-        logoAlt: "Senyou Logo",
-        title: "React Developer",
-        company: "株式会社Senyou",
-        type: "Full-time",
-        startDate: "Feb 2022",
-        endDate: "Jul 2023",
-        location: "Remote",
-        description: "React Developer building modern web applications for Japanese clients using React.js and TypeScript with focus on performance and user experience.",
-        skills: ["React.js", "TypeScript"],
-        details: `<div class="space-y-4">
-        <p>React Developer specializing in building modern web applications for Japanese clients. Expertise in React ecosystem including hooks, context API, and modern web technologies. Strong focus on creating responsive, high-performance applications with TypeScript for type safety and better developer experience.</p>
-        
-        <div class="space-y-3">
-          <h4 class="font-semibold text-lg">Responsibilities</h4>
-          <ul class="list-disc pl-5 space-y-2">
-            <li>Develop interactive and responsive user interfaces using React.js and modern JavaScript patterns</li>
-            <li>Implement modern web technologies for improved performance and SEO</li>
-            <li>Utilize TypeScript for type-safe development and better code maintainability</li>
-            <li>Create reusable React components following best practices and design patterns</li>
-            <li>Implement state management using React Context API and custom hooks</li>
-            <li>Optimize application performance through code splitting and lazy loading</li>
-            <li>Collaborate with Japanese clients to gather requirements and deliver solutions</li>
-            <li>Conduct code reviews and ensure adherence to coding standards</li>
-          </ul>
-        </div>
-
-        <div class="space-y-3">
-          <h4 class="font-semibold text-lg">Achievements</h4>
-          <ul class="list-disc pl-5 space-y-2">
-            <li>Successfully delivered multiple React applications to Japanese clients with 100% satisfaction rate</li>
-            <li>Improved application performance by 60% through optimization techniques</li>
-            <li>Reduced bug reports by 45% through TypeScript implementation and better type safety</li>
-            <li>Created component library used across multiple projects saving 30% development time</li>
-            <li>Implemented responsive design achieving 95% mobile usability score</li>
-            <li>Established coding standards and best practices adopted by the development team</li>
-          </ul>
-        </div>
-      </div>`
-    },
-    {
         logo: "/work/union.jpeg",
         logoAlt: "The Union Logo",
         showInCV: true,
+        cvCompany: "The Union (Myanmar Office)",
+        cvSections: [{
+            bullets: [
+                "Led development of web and mobile apps for tuberculosis and lung disease programmes across Myanmar, and mentored junior developers",
+                "Built the Union Volunteer mobile app (React Native) used by healthcare workers across Myanmar",
+                "Delivered a COVID-19 data reporting system during the pandemic",
+                "Developed a national-level API gateway shared by multiple healthcare organisations",
+                "Built web applications and REST APIs with PHP and Laravel, gathering requirements directly from doctors and volunteers",
+                "Introduced Docker-based deployment and CI/CD, and migrated legacy systems to a modern architecture without data loss"
+            ]
+        }],
         title: "Software Developer",
         company: "International Union Against Tuberculosis and Lung Disease (The Union), Myanmar Office",
         type: "Full-time",

@@ -1,6 +1,12 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
-import { EnvelopeIcon, MapPinIcon, ArrowUpRightIcon } from '@heroicons/react/24/outline';
+import {
+  EnvelopeIcon,
+  MapPinIcon,
+  ArrowUpRightIcon,
+  BoltIcon,
+  SparklesIcon,
+  ChatBubbleLeftRightIcon
+} from '@heroicons/react/24/outline';
 import Layout from '@/components/Layout';
 import PageHeader from '@/components/ui/PageHeader';
 import Reveal from '@/components/ui/Reveal';
@@ -11,6 +17,24 @@ export const metadata: Metadata = {
   title: 'Contact',
   description: 'Get in touch for collaborations, engineering work or just to say hello.',
 };
+
+const services = [
+  {
+    title: 'Build your app fast',
+    description: 'From idea to a working product: web, mobile or backend.',
+    icon: BoltIcon
+  },
+  {
+    title: 'Add AI to your product',
+    description: 'AI agents, chat assistants and automation for your existing app.',
+    icon: SparklesIcon
+  },
+  {
+    title: 'Technical advice',
+    description: 'Architecture planning, code review and picking the right tech stack.',
+    icon: ChatBubbleLeftRightIcon
+  }
+];
 
 export default function ContactPage() {
   return (
@@ -59,14 +83,35 @@ export default function ContactPage() {
           </a>
         </Reveal>
 
-        <Reveal delay={100} className="card flex flex-col items-center justify-center p-8 text-center">
-          <div className="relative h-36 w-36 overflow-hidden rounded-full border-2 border-primary/40 p-1">
-            <Image src="/profile.png" alt={`Portrait of ${site.name}`} fill sizes="144px" className="rounded-full object-cover" />
+        <Reveal delay={100} className="card flex flex-col p-6 sm:p-8">
+          <p className="eyebrow mb-5 !text-muted">What I can help with</p>
+          <ul className="mb-8 space-y-5">
+            {services.map((service) => {
+              const Icon = service.icon;
+              return (
+                <li key={service.title} className="flex items-start gap-4">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <p className="font-semibold text-fg">{service.title}</p>
+                    <p className="mt-0.5 text-sm leading-relaxed text-muted">{service.description}</p>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+
+          <div className="mt-auto flex items-start gap-3 border-t border-line pt-6">
+            <span className="relative mt-1.5 flex h-2.5 w-2.5" aria-hidden="true">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
+            </span>
+            <div>
+              <p className="font-medium text-fg">Open to new projects</p>
+              <p className="text-sm text-muted">Usually replies within 24 hours</p>
+            </div>
           </div>
-          <p className="mt-5 font-display text-xl font-semibold text-fg">{site.name}</p>
-          <p className="mt-1 text-sm text-muted">
-            {site.role}, building across web, mobile, cloud and AI. Always open to discussing new opportunities.
-          </p>
         </Reveal>
       </div>
     </Layout>

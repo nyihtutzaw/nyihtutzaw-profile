@@ -1,65 +1,37 @@
 import Link from 'next/link';
 import Reveal from '@/components/ui/Reveal';
 import SpotlightCard from '@/components/ui/SpotlightCard';
-import { 
-  CodeBracketIcon, 
-  CloudArrowUpIcon,
-  LightBulbIcon,
+import {
+  Squares2X2Icon,
+  SparklesIcon,
   RocketLaunchIcon,
-  AcademicCapIcon,
-  HeartIcon
+  ArrowRightIcon
 } from '@heroicons/react/24/outline';
 
 const AboutSection = () => {
-  const timelineEvents = [
+  const strengths = [
     {
-      year: '2017-2019',
-      title: 'Early Development Journey',
-      description: 'Started as a freelance developer while teaching programming, gaining hands-on experience with modern web technologies and building foundational skills.',
-      icon: CodeBracketIcon
+      title: 'Experience across many kinds of apps',
+      description: 'Web and mobile apps, e-commerce stores, healthcare systems, security products and AI agents. I have built them end to end, frontend to backend to cloud.',
+      icon: Squares2X2Icon
     },
     {
-      year: '2019-2024',
-      title: 'Healthcare Tech Leadership',
-      description: 'Led development teams at Union Myanmar, implementing scalable healthcare solutions and mentoring junior developers while mastering cloud technologies.',
-      icon: HeartIcon
+      title: 'Strong with AI assistants',
+      description: 'I use AI coding assistants every day to plan, write, test and review code. I know how to guide them well and how to check what they produce.',
+      icon: SparklesIcon
     },
     {
-      year: '2023-2024',
-      title: 'E-Commerce Excellence',
-      description: 'Developed robust e-commerce platforms for Japanese brands, specializing in Magento customization and React-based frontend solutions.',
-      icon: CloudArrowUpIcon
-    },
-    {
-      year: '2024-2025',
-      title: 'Cybersecurity Innovation',
-      description: 'Led AI-powered security solutions development at RV Connex, integrating advanced technologies for enterprise-level protection systems.',
-      icon: LightBulbIcon
-    },
-{
-      year: '2024-Present',
-      title: 'AI Agents for Consumer Brands',
-      description: 'Developing AI agents for Revenue Growth Management at ArcFusion for a US-based consumer goods client - optimizing pricing, promotions, assortment, and demand forecasting for consumer goods brands.',
+      title: 'Together: I can build any app, fast',
+      description: 'Experience tells me what to build and how it should work. AI lets me build it much faster. You get a working product in weeks, not months.',
       icon: RocketLaunchIcon
     }
   ];
 
-  const coreValues = [
-    {
-      title: 'Innovation',
-      description: 'Constantly exploring new technologies and approaches to solve complex problems',
-      icon: LightBulbIcon
-    },
-    {
-      title: 'Quality',
-      description: 'Committed to writing clean, maintainable code and delivering exceptional user experiences',
-      icon: CodeBracketIcon
-    },
-    {
-      title: 'Growth',
-      description: 'Continuous learning and skill development to stay at the forefront of technology',
-      icon: AcademicCapIcon
-    }
+  const quickFacts = [
+    { label: 'Based in', value: 'Bangkok, Thailand' },
+    { label: 'Building since', value: '2017' },
+    { label: 'Focus', value: 'Full-Stack & AI' },
+    { label: 'Now at', value: 'ArcFusion' }
   ];
 
   return (
@@ -67,76 +39,54 @@ const AboutSection = () => {
       <Reveal className="mb-14 max-w-3xl">
         <p className="eyebrow mb-3">About</p>
         <h1 className="text-4xl font-bold text-fg md:text-5xl">
-          From teaching code to <span className="gradient-text">shipping AI</span>
+          I build apps <span className="gradient-text">fast</span>
         </h1>
         <p className="mt-4 text-lg leading-relaxed text-muted">
-          A passionate developer turned Senior Full-Stack & AI Engineer. My journey is driven by curiosity, innovation and the pursuit of
-          excellence in every line of code.
+          I&apos;m a Senior Full-Stack & AI Engineer. Years of building real products, combined with AI assistants,
+          let me take an idea to a working app quickly.
         </p>
       </Reveal>
 
-      <div className="mb-20 grid gap-10 md:grid-cols-2 lg:gap-14">
-        <Reveal className="space-y-5">
-          <h2 className="text-2xl font-semibold text-fg md:text-3xl">More than just code</h2>
-          <p className="leading-relaxed text-muted">
-            I believe technology should serve humanity. Throughout my career I&apos;ve focused on solutions that make a real
-            difference — whether it&apos;s healthcare systems that save lives or AI applications that unlock human potential.
-          </p>
-          <p className="leading-relaxed text-muted">
-            Based in Bangkok, Thailand, I bring a global perspective to every project, having worked with clients and teams
-            across Asia and beyond. My approach combines technical expertise with a deep understanding of business needs and
-            user experience.
-          </p>
-        </Reveal>
-
-        <div className="grid gap-4">
-          {coreValues.map((value, index) => {
-            const Icon = value.icon;
-            return (
-              <Reveal key={value.title} delay={index * 90}>
-                <SpotlightCard className="flex items-start gap-4 p-5">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-fg">{value.title}</h3>
-                    <p className="mt-1 text-sm leading-relaxed text-muted">{value.description}</p>
-                  </div>
-                </SpotlightCard>
-              </Reveal>
-            );
-          })}
-        </div>
-      </div>
-
-      <Reveal>
-        <h2 className="mb-10 text-2xl font-semibold text-fg md:text-3xl">Career timeline</h2>
-      </Reveal>
-      <ol className="relative ml-3 space-y-8 border-l border-line pl-8 sm:ml-0 sm:pl-10">
-        {timelineEvents.map((event, index) => {
-          const Icon = event.icon;
-          const isLast = index === timelineEvents.length - 1;
+      <div className="mb-16 grid gap-4 md:grid-cols-3">
+        {strengths.map((item, index) => {
+          const Icon = item.icon;
           return (
-            <li key={event.year} className="relative">
-              <span
-                className={`absolute -left-[45px] top-5 flex h-8 w-8 items-center justify-center rounded-full border-2 sm:-left-[53px] ${
-                  isLast ? 'border-primary bg-primary text-primary-fg shadow-lg shadow-primary/30' : 'border-line bg-surface text-muted'
-                }`}
-                aria-hidden="true"
-              >
-                <Icon className="h-4 w-4" />
-              </span>
-              <Reveal delay={index * 60}>
-                <article className="card p-5 transition-colors hover:border-primary/30 sm:p-6">
-                  <p className="font-mono text-xs text-primary">{event.year}</p>
-                  <h3 className="mt-1.5 text-lg font-semibold text-fg sm:text-xl">{event.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">{event.description}</p>
-                </article>
-              </Reveal>
-            </li>
+            <Reveal key={item.title} delay={index * 90}>
+              <SpotlightCard className="h-full p-6">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <h2 className="mt-4 text-lg font-semibold text-fg">{item.title}</h2>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{item.description}</p>
+              </SpotlightCard>
+            </Reveal>
           );
         })}
-      </ol>
+      </div>
+
+      <Reveal className="mb-16 max-w-3xl space-y-4">
+        <h2 className="text-2xl font-semibold text-fg md:text-3xl">What I&apos;m doing now</h2>
+        <p className="leading-relaxed text-muted">
+          At ArcFusion I build AI data products: chat-with-your-data agents, an AI assistant for promotion managers,
+          and a customer segmentation platform for a leading Thai retailer. Before that I built AI security products at RV Connex, e-commerce sites for Japanese brands, and
+          healthcare systems at The Union in Myanmar.
+        </p>
+        <Link href="/experience" className="inline-flex items-center gap-1.5 font-medium text-primary hover:underline">
+          See my full experience
+          <ArrowRightIcon className="h-4 w-4" />
+        </Link>
+      </Reveal>
+
+      <Reveal>
+        <dl className="grid grid-cols-2 gap-4 md:grid-cols-4">
+          {quickFacts.map((fact) => (
+            <div key={fact.label} className="card p-5">
+              <dt className="font-mono text-xs text-primary">{fact.label}</dt>
+              <dd className="mt-1.5 font-semibold text-fg">{fact.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </Reveal>
 
       <Reveal className="mt-20">
         <div className="relative overflow-hidden rounded-3xl border border-line bg-surface p-8 text-center md:p-12">

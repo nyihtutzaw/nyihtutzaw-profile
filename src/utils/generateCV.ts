@@ -1,285 +1,248 @@
-import { educationData } from '@/data/education';
 import jsPDF from 'jspdf';
-import { workExperienceData } from '@/data/experience';
-import { skillGroups } from '@/data/skills';
-import { formatPeriod } from '@/utils/dateUtils';
+import { buildCVMarkdown } from '@/lib/cvContent';
 
-export const generateCV = () => {
-    const doc = new jsPDF();
-    let yPos = 20;
-    const lineHeight = 7;
-    const margin = 20;
-    const pageWidth = 210;
-    const contentWidth = pageWidth - (margin * 2);
-    const pageHeight = 297;
-    const maxY = pageHeight - margin;
+type RGB = [number, number, number];
 
-    // Helper functions
-    const addText = (text: string, size = 12, isBold = false, customLineHeight?: number, xPosition = margin) => {
-        doc.setFontSize(size);
-        doc.setFont('helvetica', isBold ? 'bold' : 'normal');
-        const lines = doc.splitTextToSize(text, contentWidth); // Full width for normal content
+const PAGE_WIDTH = 210;
+const PAGE_HEIGHT = 297;
+const MARGIN = 18;
+const CONTENT_WIDTH = PAGE_WIDTH - MARGIN * 2;
+const BOTTOM = PAGE_HEIGHT - 16;
+const BULLET_INDENT = 4;
 
-        if (yPos + (lines.length * (customLineHeight || lineHeight)) > maxY) {
-            doc.addPage();
-            yPos = margin;
-        }
+const TEXT: RGB = [33, 37, 41];
+const MUTED: RGB = [95, 101, 110];
+const ACCENT: RGB = [30, 64, 175];
 
-        doc.text(lines, xPosition, yPos, { align: 'left' });
-        yPos += (lines.length * (customLineHeight || lineHeight));
-    };
+const PT_TO_MM = 0.3528;
+const lineHeight = (size: number) => size * PT_TO_MM * 1.32;
+const ascent = (size: number) => size * PT_TO_MM * 0.78;
 
-    const addSection = (title: string) => {
-        if (yPos + 20 > maxY) {
-            doc.addPage();
-            yPos = margin;
-        }
+const stripBold = (text: string) => text.replace(/\*\*/g, '');
 
-        yPos += 5;
-        addText(title.toUpperCase(), 14, true);
-        yPos += 3;
-        doc.setDrawColor(0);
-        doc.line(margin, yPos, pageWidth - margin, yPos);
-        yPos += 5;
-    };
-
-    // ATS-Friendly Header with clear contact information
-    const initialYPos = yPos;
-    // Left column - Name and Title
-    addText('NYI HTUT ZAW', 20, true);
-    addText('Senior Full-Stack & AI Engineer', 14, true);
-    addText('Generative AI | Full-Stack Development | Cloud Architecture', 10);
-    addText('Bangkok, Thailand (Open to Remote/Hybrid)', 10);
-
-    // Right column - Contact Information
-    yPos = initialYPos;
-    const rightColumnX = pageWidth / 2 + 10;
-    
-    // Get dynamic portfolio URL
-    const portfolioUrl = typeof window !== 'undefined' 
-      ? `${window.location.origin}` 
-      : 'zaw27.com';
-    
-    addText('Email: nyihtutzaw.2015@gmail.com', 10, false, lineHeight, rightColumnX);
-    addText('Phone: +66 92 540 2997', 10, false, lineHeight, rightColumnX);
-    addText('Portfolio: ' + portfolioUrl, 10, false, lineHeight, rightColumnX);
-    addText('LinkedIn: linkedin.com/in/nyihtutzaw', 10, false, lineHeight, rightColumnX);
-    addText('GitHub: github.com/nyihtutzaw', 10, false, lineHeight, rightColumnX);
-
-    // Reset yPos after header
-    yPos = Math.max(yPos, initialYPos + 40);
-
-    // Professional Summary with ATS keywords
-    addSection('Professional Summary');
-    addText('Senior AI Engineer with 7+ years of experience building AI-powered applications and enterprise solutions for consumer brands. Specialized in AI Agents for Revenue Growth Management - Trade, Pricing, Promotions, Assortment, and Forecast. Expert in Generative AI, LangChain, LangGraph, Python, and Golang with AWS cloud deployment. Proven track record leading development teams and delivering high-performance solutions across healthcare, e-commerce, and consumer goods industries.');
-    yPos += 5;
-
-    // Experience Section with ATS-friendly formatting
-    addSection('Professional Experience');
-    workExperienceData.filter(e => e.showInCV).forEach(exp => {
-
-        yPos += 3;
-
-        addText(`${exp.title.toUpperCase()} | ${exp.company.toUpperCase()}`, 12, true);
-        addText(`${formatPeriod(exp.startDate, exp.endDate)} | ${exp.location}`, 10, false, 5);
-        
-        // Add company description if available
-        if (exp.description) {
-            addText(exp.description, 9, false, 5);
-            yPos += 2;
-        }
-        
-        yPos += 3;
-       
-        // Extract and add only <li> items from HTML content
-        const liItems = exp.details?.match(/<li>(.*?)<\/li>/g)?.map(item =>
-            item.replace(/<\/?li>/g, '').trim()
-        ) || [];
-        
-        // Limit to top 6-8 key points for CV
-        const keyPoints = liItems.slice(0, 8);
-        
-        keyPoints.forEach(item => {
-            // Remove any remaining HTML tags and decode HTML entities
-            const decodedItem = item
-                .replace(/<[^>]*>/g, '') // Remove any HTML tags
-                .replace(/&amp;/g, '&')
-                .replace(/&lt;/g, '<')
-                .replace(/&gt;/g, '>')
-                .replace(/&quot;/g, '"')
-                .replace(/&#39;/g, "'")
-                .replace(/Currently developing /g, 'Developing ') // Remove "Currently" for CV
-                .replace(/Currently /g, '') // Remove other "Currently" references
-                .replace(/Leading /g, 'Led ') // Convert present to past tense where appropriate
-                .replace(/Implementing /g, 'Implemented ')
-                .replace(/Building /g, 'Built ')
-                .replace(/Utilizing /g, 'Utilized ')
-                .replace(/Integrating /g, 'Integrated ')
-                .replace(/Designing /g, 'Designed ')
-                .replace(/Deploying /g, 'Deployed ');
-                
-            addText(`• ${decodedItem}`, 9, false, 5);
-        });
-
-        // Add key skills for this position
-        if (exp.skills && exp.skills.length > 0) {
-          yPos += 2;
-          addText(`Key Technologies: ${exp.skills.slice(0, 6).join(', ')}`, 9, true, 4);
-        }
-
-        yPos += 4;
-    });
-
-    // Education Section with ATS formatting
-    addSection('Education');
-    educationData.forEach(edu => {
-        addText(`${edu.degree.toUpperCase()}`, 11, true);
-        addText(`${edu.institution.toUpperCase()}`, 10);
-        addText(`${edu.period} | Grade: ${edu.grade}`, 9);
-        if (edu.skills && edu.skills.length > 0) {
-            addText(`Focus: ${edu.skills.join(', ')}`, 9);
-        }
-        yPos += 2;
-    });
-
-    // Skills Section with ATS-friendly categorization
-    addSection('Core Competencies');
-    
-    // AI & Machine Learning
-    addText('AI & Machine Learning:', 10, true);
-    addText('Generative AI, LangChain, LangGraph, Langfuse, OpenAI APIs, Gemini APIs, Hugging Face, RAG, Prompt Engineering, Vector Databases, TensorFlow, PyTorch', 9);
-    yPos += 3;
-    
-    // Programming Languages
-    addText('Programming Languages:', 10, true);
-    addText('Python, Golang, JavaScript, TypeScript, PHP, Dart', 9);
-    yPos += 3;
-    
-    // Frontend Technologies
-    addText('Frontend & Mobile:', 10, true);
-    addText('React.js, React Native, Next.js, HTML5, CSS3, Tailwind CSS, Redux.js, Material-UI', 9);
-    yPos += 3;
-    
-    // Backend Technologies
-    addText('Backend & APIs:', 10, true);
-    addText('Node.js, Express.js, FastAPI, Echo, Laravel, GraphQL, Apollo GraphQL, REST APIs', 9);
-    yPos += 3;
-    
-    // Database & Storage
-    addText('Database & Storage:', 10, true);
-    addText('PostgreSQL, MySQL, MongoDB, Redis, Firebase, AWS S3', 9);
-    yPos += 3;
-    
-    // Cloud & DevOps
-    addText('Cloud & DevOps:', 10, true);
-    addText('AWS, Google Cloud Platform, Docker, Kubernetes, CI/CD, GitHub Actions, GitLab', 9);
-
-    // Languages Section
-    addSection('Languages');
-    addText('English (Professional Working Proficiency)', 9, false, 4);
-    addText('Burmese (Native)', 9, false, 4);
-    addText('Thai (Basic)', 9, false, 4);
-
-    // Save the PDF
-    doc.save('NyiHtutZaw_CV.pdf');
+/** Link target for a contact entry such as "Email: a@b.com" or "LinkedIn: linkedin.com/in/x". */
+const contactLink = (label: string, value: string): string | undefined => {
+    if (value.includes('@')) return `mailto:${value}`;
+    if (/phone/i.test(label)) return `tel:${value.replace(/[^\d+]/g, '')}`;
+    if (/^[\w.-]+\.[a-z]{2,}(\/\S*)?$/i.test(value)) return `https://${value}`;
+    return undefined;
 };
+
+/** Download the public CV, built from the same Markdown the admin CV tool starts from. */
+export const generateCV = () => generateCVFromMarkdown(buildCVMarkdown());
 
 /**
  * Render a Markdown CV (as produced/edited in the admin CV Adjustment tool) to a
- * PDF. Supports the subset of Markdown used by the CV: `#`/`##`/`###` headings,
- * `- ` bullets, `**bold**` inline emphasis and `**Label:**` lead-in lines.
+ * PDF. Supports the subset of Markdown used by the CV: `#` name, a `##` headline
+ * straight after it, `##` section headings, `###` job/degree titles (the next line
+ * is treated as its date/location line), `- ` bullets, `**bold**` lines and
+ * `**Label:** rest` lines. In the header, a line of `Label: value | ...` pairs is
+ * rendered as clickable contact links.
  */
 export const generateCVFromMarkdown = (markdown: string, filename = 'NyiHtutZaw_CV.pdf') => {
-    const doc = new jsPDF();
-    let yPos = 20;
-    const lineHeight = 7;
-    const margin = 20;
-    const pageWidth = 210;
-    const contentWidth = pageWidth - margin * 2;
-    const pageHeight = 297;
-    const maxY = pageHeight - margin;
+    const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+    let y = MARGIN;
+    let name = '';
+    let previous: 'start' | 'name' | 'headline' | 'section' | 'title' | 'meta' | 'text' = 'start';
+    let inHeader = true;
 
-    const stripBold = (text: string) => text.replace(/\*\*/g, '');
-
-    const addText = (
-        text: string,
-        size = 12,
-        isBold = false,
-        customLineHeight?: number,
-        xPosition = margin
-    ) => {
+    const setFont = (size: number, style: 'normal' | 'bold' | 'italic' = 'normal', color: RGB = TEXT) => {
         doc.setFontSize(size);
-        doc.setFont('helvetica', isBold ? 'bold' : 'normal');
-        const lines = doc.splitTextToSize(text, contentWidth);
-        if (yPos + lines.length * (customLineHeight || lineHeight) > maxY) {
-            doc.addPage();
-            yPos = margin;
-        }
-        doc.text(lines, xPosition, yPos, { align: 'left' });
-        yPos += lines.length * (customLineHeight || lineHeight);
+        doc.setFont('helvetica', style);
+        doc.setTextColor(...color);
     };
 
-    const addSection = (title: string) => {
-        if (yPos + 20 > maxY) {
+    const ensureSpace = (height: number) => {
+        if (y + height > BOTTOM) {
             doc.addPage();
-            yPos = margin;
+            y = MARGIN;
         }
-        yPos += 5;
-        addText(title.toUpperCase(), 14, true);
-        yPos += 3;
-        doc.setDrawColor(0);
-        doc.line(margin, yPos, pageWidth - margin, yPos);
-        yPos += 5;
     };
 
-    const rawLines = markdown.replace(/\r\n/g, '\n').split('\n');
+    const drawLines = (lines: string[], size: number, x: number) => {
+        lines.forEach((line) => {
+            ensureSpace(lineHeight(size));
+            doc.text(line, x, y + ascent(size));
+            y += lineHeight(size);
+        });
+    };
 
-    rawLines.forEach((raw) => {
-        const line = raw.trimEnd();
-        const trimmed = line.trim();
+    const paragraph = (text: string, size: number, style: 'normal' | 'bold' | 'italic' = 'normal', color: RGB = TEXT) => {
+        setFont(size, style, color);
+        drawLines(doc.splitTextToSize(text, CONTENT_WIDTH), size, MARGIN);
+    };
 
-        if (trimmed === '') {
-            yPos += 3;
-            return;
-        }
+    const bullet = (text: string) => {
+        const size = 9.5;
+        setFont(size);
+        const lines: string[] = doc.splitTextToSize(text, CONTENT_WIDTH - BULLET_INDENT);
+        ensureSpace(lineHeight(size));
+        doc.text('•', MARGIN + 0.5, y + ascent(size));
+        drawLines(lines, size, MARGIN + BULLET_INDENT);
+        y += 0.6;
+    };
 
-        // Main name/title
-        if (trimmed.startsWith('# ')) {
-            addText(stripBold(trimmed.slice(2)).toUpperCase(), 20, true);
+    // "**Label:** rest" with the bold label and the text on the same line.
+    const labelLine = (label: string, rest: string) => {
+        const size = 9.5;
+        const labelText = `${label}: `;
+        setFont(size, 'bold');
+        const labelWidth = doc.getTextWidth(labelText);
+        setFont(size);
+        const first: string = doc.splitTextToSize(rest, CONTENT_WIDTH - labelWidth)[0] ?? '';
+        ensureSpace(lineHeight(size));
+        setFont(size, 'bold');
+        doc.text(labelText, MARGIN, y + ascent(size));
+        setFont(size);
+        doc.text(first, MARGIN + labelWidth, y + ascent(size));
+        y += lineHeight(size);
+        const remaining = rest.slice(first.length).trimStart();
+        if (remaining) drawLines(doc.splitTextToSize(remaining, CONTENT_WIDTH), size, MARGIN);
+        y += 0.8;
+    };
+
+    const contactLine = (text: string) => {
+        const size = 9;
+        const separator = '   |   ';
+        setFont(size);
+        const separatorWidth = doc.getTextWidth(separator);
+        let x = MARGIN;
+        y += 0.8;
+        text.split('|').map((part) => part.trim()).filter(Boolean).forEach((part, index) => {
+            const match = part.match(/^([^:]+):\s*(.+)$/);
+            const value = match ? match[2] : part;
+            const url = match ? contactLink(match[1], value) : undefined;
+            const width = doc.getTextWidth(value);
+            if (index > 0) {
+                if (x + separatorWidth + width > MARGIN + CONTENT_WIDTH) {
+                    x = MARGIN;
+                    y += lineHeight(size);
+                } else {
+                    setFont(size, 'normal', MUTED);
+                    doc.text(separator, x, y + ascent(size));
+                    x += separatorWidth;
+                }
+            }
+            setFont(size, 'normal', url ? ACCENT : TEXT);
+            if (url) {
+                doc.textWithLink(value, x, y + ascent(size), { url });
+            } else {
+                doc.text(value, x, y + ascent(size));
+            }
+            x += width;
+        });
+        y += lineHeight(size);
+    };
+
+    const section = (title: string) => {
+        ensureSpace(16);
+        y += inHeader ? 3 : 4;
+        inHeader = false;
+        setFont(11, 'bold', ACCENT);
+        doc.text(title.toUpperCase(), MARGIN, y + ascent(11));
+        y += lineHeight(11) + 0.3;
+        doc.setDrawColor(...ACCENT);
+        doc.setLineWidth(0.3);
+        doc.line(MARGIN, y, PAGE_WIDTH - MARGIN, y);
+        y += 2.5;
+    };
+
+    // "Title | Company" as a bold title followed by the company on the same line.
+    const title = (text: string) => {
+        ensureSpace(22);
+        if (previous !== 'section') y += 2.5;
+        const size = 10.5;
+        const [role, ...rest] = text.split(' | ');
+        const company = rest.join(' | ');
+        setFont(size, 'bold');
+        const roleWidth = doc.getTextWidth(role);
+        const companyText = company ? `  —  ${company}` : '';
+        setFont(size);
+        if (!company || roleWidth + doc.getTextWidth(companyText) > CONTENT_WIDTH) {
+            paragraph(text, size, 'bold');
             return;
         }
-        // Section header
-        if (trimmed.startsWith('## ')) {
-            addSection(stripBold(trimmed.slice(3)));
+        setFont(size, 'bold');
+        doc.text(role, MARGIN, y + ascent(size));
+        setFont(size, 'normal', ACCENT);
+        doc.text(companyText, MARGIN + roleWidth, y + ascent(size));
+        y += lineHeight(size);
+    };
+
+    markdown.replace(/\r\n/g, '\n').split('\n').forEach((raw) => {
+        const line = raw.trim();
+
+        if (line === '') {
+            y += 1.5;
             return;
         }
-        // Sub-header (job title / degree)
-        if (trimmed.startsWith('### ')) {
-            yPos += 3;
-            addText(stripBold(trimmed.slice(4)).toUpperCase(), 12, true);
+        if (line.startsWith('# ')) {
+            name = stripBold(line.slice(2));
+            setFont(22, 'bold');
+            doc.text(name.toUpperCase(), MARGIN, y + ascent(22));
+            y += lineHeight(22);
+            previous = 'name';
             return;
         }
-        // Bullet
-        if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
-            addText(`• ${stripBold(trimmed.slice(2))}`, 9, false, 5);
+        if (line.startsWith('## ')) {
+            if (previous === 'name') {
+                paragraph(stripBold(line.slice(3)), 12.5, 'bold', ACCENT);
+                y += 0.5;
+                previous = 'headline';
+            } else {
+                section(stripBold(line.slice(3)));
+                previous = 'section';
+            }
             return;
         }
-        // "**Label:** rest" lead-in line
-        const labelMatch = trimmed.match(/^\*\*(.+?):\*\*\s*(.*)$/);
+        if (line.startsWith('### ')) {
+            title(stripBold(line.slice(4)));
+            previous = 'title';
+            return;
+        }
+        if (line.startsWith('- ') || line.startsWith('* ')) {
+            bullet(stripBold(line.slice(2)));
+            previous = 'text';
+            return;
+        }
+        const labelMatch = line.match(/^\*\*(.+?):\*\*\s*(.*)$/);
         if (labelMatch) {
-            addText(`${labelMatch[1]}:`, 10, true, 5);
-            if (labelMatch[2]) addText(stripBold(labelMatch[2]), 9, false, 5);
+            labelLine(labelMatch[1], stripBold(labelMatch[2]));
+            previous = 'text';
             return;
         }
-        // Fully bold line
-        if (/^\*\*.+\*\*$/.test(trimmed)) {
-            addText(stripBold(trimmed), 10, true, 5);
+        if (/^\*\*.+\*\*$/.test(line)) {
+            ensureSpace(14);
+            y += 1;
+            paragraph(stripBold(line), 9.5, 'bold');
+            y += 0.4;
+            previous = 'text';
+            return;
+        }
+        if (inHeader && /\S+@\S+\.\S+/.test(line)) {
+            contactLine(stripBold(line));
+            previous = 'text';
+            return;
+        }
+        if (previous === 'title') {
+            paragraph(stripBold(line), 9, 'italic', MUTED);
+            y += 0.6;
+            previous = 'meta';
             return;
         }
 
-        // Normal paragraph text
-        addText(stripBold(trimmed), 10, false, 5);
+        paragraph(stripBold(line), inHeader ? 9.5 : 9.5, 'normal', inHeader ? MUTED : TEXT);
+        if (previous === 'meta') y += 0.8;
+        previous = 'text';
     });
 
+    const pageCount = doc.getNumberOfPages();
+    for (let page = 1; page <= pageCount; page++) {
+        doc.setPage(page);
+        setFont(8, 'normal', MUTED);
+        doc.text(`${name}  ·  Page ${page} of ${pageCount}`, PAGE_WIDTH / 2, PAGE_HEIGHT - 9, { align: 'center' });
+    }
+
+    doc.setProperties({ title: `${name} — CV`, author: name });
     doc.save(filename);
 };

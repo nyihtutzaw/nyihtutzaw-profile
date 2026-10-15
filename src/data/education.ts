@@ -26,7 +26,7 @@ interface Education {
       logo: "/education/uclan.png",
       logoAlt: "UCLan Logo",
       period: "Dec 2016 - July 2018",
-      degree: "Business Communication and Information Systems",
+      degree: "BSc in Business Communication and Information Systems",
       institution: "University of Central Lancashire",
       grade: "Degree"
     },
