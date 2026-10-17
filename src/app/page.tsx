@@ -12,7 +12,7 @@ import SpotlightCard from '@/components/ui/SpotlightCard';
 const quickLinks = [
   { href: '/about', description: 'From teaching programming to shipping AI agents in production.' },
   { href: '/experience', description: 'Roles, teams and the systems I built along the way.' },
-  { href: '/projects', description: 'A multi-client point of sale and a logistics management system.' },
+  { href: '/projects', description: 'A point of sale, a logistics system and a recruitment document system.' },
   { href: '/skills', description: 'The languages, frameworks and tooling I reach for.' },
   { href: '/education', description: 'Degrees, certifications and ongoing study.' },
   { href: '/blog', description: 'Notes and tutorials published on Medium.' },

@@ -167,6 +167,86 @@ const projects: Project[] = [
       },
     ],
   },
+  {
+    slug: 'recruitment-document-management-system',
+    title: 'Recruitment Document Management System',
+    category: 'Platform',
+    featured: true,
+    standalone: { org: 'Side project', role: 'Full-stack Developer', skills: ['Next.js', 'React', 'Tailwind CSS'] },
+    thumbnail: '/projects/recruitment-document-management-system/thumbnail.jpg',
+    summary:
+      'A document management system for a recruitment agency that sends workers from Myanmar to Japan. It covers the whole journey: CV, interview, government documents, departure and billing.',
+    highlights: [
+      'Student CVs filled in a step-by-step form and rendered as a Japanese 履歴書',
+      'Interview groups with pass/fail results and terms-and-conditions acceptance',
+      'Visa and document stages, approval-based spending, vouchers and invoices',
+    ],
+    steps: [
+      {
+        title: 'See where every student stands',
+        description: 'The admin dashboard counts students at each stage, from registration to departure.',
+        bullets: ['Students, CVs, interviews and waiting list', 'Passed, document-in-progress and departed totals'],
+        image: '/projects/recruitment-document-management-system/dashboard.jpg',
+        imageAlt: 'Recruitment system: See where every student stands',
+      },
+      {
+        title: 'Collect student CVs',
+        description: 'Every registered student has a CV record staff can filter, sort and review.',
+        bullets: ['Japanese level, age, gender and Tokutei certificate at a glance', 'Tracks which CVs have all fields confirmed'],
+        image: '/projects/recruitment-document-management-system/cvs.jpg',
+        imageAlt: 'Recruitment system: Collect student CVs',
+      },
+      {
+        title: 'Fill in the CV step by step',
+        description: "Staff fill each student's CV in a 6-step Japanese register form, with Myanmar hints under every field.",
+        bullets: ['Names in Myanmar, English and katakana', 'A checkbox on each field confirms it has been checked', 'Edit logs show who changed what'],
+        image: '/projects/recruitment-document-management-system/cvform.jpg',
+        imageAlt: 'Recruitment system: Fill in the CV step by step',
+      },
+      {
+        title: 'Generate a Japanese-format CV',
+        description: 'Each CV is rendered as a Japanese 履歴書 (rirekisho), ready to export for employers.',
+        bullets: ['Profile, health, skills, education, work history and family', 'Edit, then export to share with Japanese companies'],
+        image: '/projects/recruitment-document-management-system/cv.jpg',
+        imageAlt: 'Recruitment system: Generate a Japanese-format CV',
+      },
+      {
+        title: 'Organise interview groups',
+        description: 'Candidates are grouped per interview, linked to the agency, the Japanese organisation and the employer.',
+        bullets: ['One group per interview date', 'Export the list to Excel'],
+        image: '/projects/recruitment-document-management-system/groups.jpg',
+        imageAlt: 'Recruitment system: Organise interview groups',
+      },
+      {
+        title: 'Record interview results',
+        description: "Inside a group, staff see each candidate's Japanese level and whether they accepted the terms and conditions, then mark who passed.",
+        bullets: ['Terms are written in Myanmar and accepted by each candidate', "Open any candidate's CV from the list", 'Download the name list for the employer'],
+        image: '/projects/recruitment-document-management-system/candidates.jpg',
+        imageAlt: 'Recruitment system: Record interview results',
+      },
+      {
+        title: 'Track government documents',
+        description: 'Admins define the visa and paperwork stages each passed worker goes through.',
+        bullets: ['COE, visa application, visa, MOL contract, Smart Card', 'Each stage links to a date field and can be reordered by drag and drop'],
+        image: '/projects/recruitment-document-management-system/stages.jpg',
+        imageAlt: 'Recruitment system: Track government documents',
+      },
+      {
+        title: 'Approve spending requests',
+        description: 'Visa fees and travel costs go through an approval chain before they are paid.',
+        bullets: ['Section leader, CFO and CEO approval', 'Amounts in USD or MMK'],
+        image: '/projects/recruitment-document-management-system/requests.jpg',
+        imageAlt: 'Recruitment system: Approve spending requests',
+      },
+      {
+        title: 'Turn vouchers into invoices',
+        description: 'Expenses are recorded as vouchers and then billed to the Japanese organisation.',
+        bullets: ['Vouchers link to the invoice that bills them', 'Invoices track totals and payment deadlines'],
+        image: '/projects/recruitment-document-management-system/vouchers.jpg',
+        imageAlt: 'Recruitment system: Turn vouchers into invoices',
+      },
+    ],
+  },
 ];
 
 export interface ProjectWithRole extends Project {
