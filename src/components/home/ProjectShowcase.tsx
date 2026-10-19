@@ -44,13 +44,7 @@ const ProjectShowcase = () => {
 
       <div className="grid gap-5 md:grid-cols-2">
         {visible.map((project, i) => (
-          <Reveal
-            key={project.slug}
-            delay={i * 70}
-            className={
-              project.featured && filter === "All" ? "md:col-span-2" : ""
-            }
-          >
+          <Reveal key={project.slug} delay={i * 70}>
             <SpotlightCard
               as={Link}
               href={`/projects/${project.slug}`}

@@ -44,7 +44,7 @@ const HeroSection = () => (
 
         <Reveal delay={80}>
           <h1 className="mt-6 text-5xl font-bold leading-[1.05] text-fg sm:text-6xl lg:text-7xl">
-            I turn ideas into <span className="gradient-text">production software.</span>
+            Experienced engineer, <span className="gradient-text">AI-accelerated delivery.</span>
           </h1>
         </Reveal>
 
