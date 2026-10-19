@@ -3,7 +3,7 @@ import Reveal from '@/components/ui/Reveal';
 import type { ProjectStep } from '@/data/projects';
 
 /** Vertical-scroll presentation: one step per screen, text beside a framed screenshot. */
-const ProjectWalkthrough = ({ steps }: { steps: ProjectStep[] }) => (
+const ProjectWalkthrough = ({ steps, device = 'web' }: { steps: ProjectStep[]; device?: 'web' | 'mobile' }) => (
   <section aria-label="Walkthrough" className="mt-16">
     <h2 className="eyebrow mb-2">Walkthrough</h2>
     {steps.map((step, i) => (
@@ -26,14 +26,21 @@ const ProjectWalkthrough = ({ steps }: { steps: ProjectStep[] }) => (
           )}
         </Reveal>
         <Reveal delay={120}>
-          <div className="card overflow-hidden shadow-xl">
-            <div className="flex h-7 items-center gap-1.5 border-b border-line px-3">
-              <i className="h-2 w-2 rounded-full bg-line" />
-              <i className="h-2 w-2 rounded-full bg-line" />
-              <i className="h-2 w-2 rounded-full bg-line" />
+          {device === 'mobile' ? (
+            // store screenshots already include a phone frame: show them on a light panel, phone-sized
+            <div className="mx-auto w-full max-w-[340px] overflow-hidden rounded-[2rem] bg-[#fafafa] shadow-xl">
+              <Image src={step.image} alt={step.imageAlt} width={1242} height={2688} sizes="340px" className="h-auto w-full" />
             </div>
-            <Image src={step.image} alt={step.imageAlt} width={2880} height={1800} sizes="(min-width: 1024px) 58vw, 100vw" className="h-auto w-full" />
-          </div>
+          ) : (
+            <div className="card overflow-hidden shadow-xl">
+              <div className="flex h-7 items-center gap-1.5 border-b border-line px-3">
+                <i className="h-2 w-2 rounded-full bg-line" />
+                <i className="h-2 w-2 rounded-full bg-line" />
+                <i className="h-2 w-2 rounded-full bg-line" />
+              </div>
+              <Image src={step.image} alt={step.imageAlt} width={2880} height={1800} sizes="(min-width: 1024px) 58vw, 100vw" className="h-auto w-full" />
+            </div>
+          )}
         </Reveal>
       </div>
     ))}

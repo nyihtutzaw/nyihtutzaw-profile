@@ -90,9 +90,26 @@ export default async function ProjectPage({
             </p>
           </div>
         )}
+        {project.stores && (
+          <div>
+            <p className="eyebrow !text-[10px] !text-muted">Available on</p>
+            <p className="flex flex-wrap gap-x-4 text-sm font-medium">
+              {project.stores.play && (
+                <a href={project.stores.play} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                  Google Play
+                </a>
+              )}
+              {project.stores.appStore && (
+                <a href={project.stores.appStore} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                  App Store
+                </a>
+              )}
+            </p>
+          </div>
+        )}
       </Reveal>
 
-      {project.steps && <ProjectWalkthrough steps={project.steps} />}
+      {project.steps && <ProjectWalkthrough steps={project.steps} device={project.device} />}
 
       <div className="mt-10 grid gap-10 lg:grid-cols-[2fr_1fr]">
         <Reveal>

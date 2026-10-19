@@ -5,7 +5,10 @@ const path = require('path');
 const dir = process.argv[2];
 const p = JSON.parse(fs.readFileSync(path.join(dir, 'project.json'), 'utf8'));
 const esc = (s = '') => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const frame = (img, alt) => `<div class="frame"><div class="dots"><i></i><i></i><i></i></div><img src="${esc(img)}" alt="${esc(alt)}"></div>`;
+// "device": "mobile" in project.json shows phone screenshots unframed and narrower (store images already include a device frame)
+const frame = (img, alt) => p.device === 'mobile'
+  ? `<div class="frame phone"><img src="${esc(img)}" alt="${esc(alt)}"></div>`
+  : `<div class="frame"><div class="dots"><i></i><i></i><i></i></div><img src="${esc(img)}" alt="${esc(alt)}"></div>`;
 
 const first = p.steps[0];
 const intro = `<section class="slide"><div><div class="step">Project</div><h1>${esc(p.title)}</h1><p class="lead">${esc(p.summary)}</p>
@@ -31,6 +34,7 @@ li::before{content:"";position:absolute;left:0;top:.55em;width:10px;height:10px;
 .frame{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card);box-shadow:0 20px 50px -20px rgba(0,0,0,.35)}
 .frame .dots{height:26px;display:flex;align-items:center;gap:6px;padding:0 12px;border-bottom:1px solid var(--line)}.frame .dots i{width:9px;height:9px;border-radius:50%;background:var(--line)}
 .frame img{display:block;width:100%;max-height:calc(100vh - 160px);object-fit:cover;object-position:top left}
+.frame.phone{justify-self:center;width:min(100%,380px);border-radius:28px;background:#fafafa}.frame.phone img{max-height:calc(100vh - 120px);object-fit:contain;object-position:center}
 .thumbbox{margin-top:24px;font-size:13px;color:var(--muted)}.thumbbox img{display:block;width:240px;aspect-ratio:16/10;object-fit:cover;object-position:top;border-radius:10px;border:1px solid var(--line);margin-top:6px}
 @media(max-width:860px){.slide{grid-template-columns:1fr;gap:20px;min-height:auto;padding:64px 20px 40px}.frame img{max-height:none}html{scroll-snap-type:none}}`;
 const js = `const s=[...document.querySelectorAll('.slide')],bar=document.getElementById('bar'),c=document.getElementById('count');

@@ -1,11 +1,13 @@
 ---
 name: project-showcase
-description: Turn a running web app into a project-showcase entry on this portfolio. Given a URL, username, password and optional instructions, log in, explore the app, capture screenshots, draft a vertical-scroll walkthrough for approval, then add it to the Projects page with a detail page. Use when the user says "add a project", "make a showcase for this app", or gives an app URL plus credentials.
+description: Turn a running web app, or a mobile app's Google Play / App Store listing, into a project-showcase entry on this portfolio. Given a URL with username and password (web), or a store link (mobile), capture screenshots, draft a vertical-scroll walkthrough for approval, then add it to the Projects page with a detail page. Use when the user says "add a project", "make a showcase for this app", or gives an app URL plus credentials, or a play.google.com / apps.apple.com link.
 ---
 
 # Project showcase
 
 Input from the user: **URL**, **username**, **password**, plus free-text instructions (what the app is, role, stack, which parts to show or skip). Ask only for what you can't discover: role, stack and period are usually not visible in the UI. Never guess them for a public page; list what you verified and ask for the rest.
+
+For a **mobile app with a store listing** (a play.google.com or apps.apple.com link), skip the login flow and follow [Mobile apps from store listings](#mobile-apps-from-store-listings) instead.
 
 ## Rules
 - **Read-only.** Log in and view pages. Never submit forms, create/edit/delete records or click destructive buttons.
@@ -31,10 +33,21 @@ Input from the user: **URL**, **username**, **password**, plus free-text instruc
    - The `/projects` card and `/projects/<slug>` detail page (vertical-scroll walkthrough via `ProjectWalkthrough`) pick it up automatically.
 6. **Verify:** `npx tsc --noEmit`, run `npx next dev -p 3111`, check `/projects` and `/projects/<slug>` return 200 and screenshot them. Confirm the live URL, host and client name appear nowhere: `curl … | grep -c -i '<host>\|<client name>'` must be 0 for the pages, and `grep -rniE '<client name>|<host>' src public` must find nothing. Then stop the server. Don't commit unless asked. Update the `/projects` intro text and home-page link description if they no longer fit the project list.
 
+## Mobile apps from store listings
+Store listings are public, so there is no login: the screenshots and description come from the listing.
+1. **Fetch:** `NODE_PATH=$PWD/node_modules node <skill>/scripts/store.cjs fetch out --play '<play URL>'` (add `--ios <apps.apple.com URL or id>` if the iOS app has a different bundle id; with only `--play` it looks the App Store up by the same package id). It saves `out/store.json` (title, developer, description, version, store links) and full-size screenshots `play-N.png` and `ios-N.jpg`. Play lists phone shots first, then tablet shots of the same screens.
+2. **Review:** build a contact sheet or Read the images. Pick 4-6 phone screens from **one** store so the frames match (App Store mockups usually sit on near-white, Play ones may sit on grey). Skip login/sign-up screens.
+3. **Personal data:** store screenshots often show a real test account (profile name, phone, email). Replace it: `store.cjs cover in.jpg out.jpg x,y,w,h '[{"text":"Thiri Khaing","size":50,"color":"#3d0a6b","bold":true},{"text":"09-478-667914","size":36,"color":"#777"}]'` paints the box in its own background colour and writes fake text (find x,y,w,h by Reading the image; displayed coordinates times the scale factor). Use `store.cjs blur in out x,y,w,h` on photos or busy backgrounds. Read the result.
+4. **Thumbnail:** `store.cjs thumb out/thumbnail.jpg a.jpg b.jpg c.jpg` lays 2-4 phones side by side on a 16:10 card. Add `--raw` when the listing has plain screen captures without a device frame. Check the App Store by name too (`itunes.apple.com/search?term=…`) when the bundle-id lookup finds nothing; many Android apps simply aren't on iOS.
+5. **Copy:** claims may come from the screenshots and the listing description (features like push notifications or favourites). Ask for what neither shows: stack (Flutter, React Native, native…), role and period. Store developer/seller names are not proof of authorship; the user says what they built.
+6. **Naming:** a published app usually shows its brand in every screenshot, so it can't be anonymised. Use the app's real name and store links only when the user confirms it's theirs to show; otherwise treat it as a client project and ask.
+7. **Draft** with `"device": "mobile"` in project.json (phones shown unframed and narrower), then continue at workflow step 5. On the site, set `device: 'mobile'` and `stores: { play, appStore }` (public listing URLs from `store.json`, without tracking params) on the project entry; the walkthrough shows phone-sized images and the detail page links to the stores.
+
 ## project.json
 ```json
 {
   "title": "Retail Point of Sale",
+  "device": "web",
   "summary": "One or two sentences on what it is and who it's for. No client name.",
   "tags": ["Point of sale", "Multi-tenant"],
   "thumbnail": "thumbnail.png",

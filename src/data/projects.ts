@@ -1,6 +1,6 @@
 import { workExperienceData } from './experience';
 
-export type ProjectCategory = 'AI' | 'Security' | 'E-commerce' | 'Healthcare' | 'Platform' | 'Logistics' | 'Web';
+export type ProjectCategory = 'AI' | 'Security' | 'E-commerce' | 'Healthcare' | 'Platform' | 'Logistics' | 'Web' | 'Mobile';
 
 export interface ProjectStep {
   title: string;
@@ -21,6 +21,10 @@ export interface Project {
   thumbnail?: string;
   /** Step-by-step walkthrough, rendered as a vertical-scroll presentation on the detail page. */
   steps?: ProjectStep[];
+  /** 'mobile' shows walkthrough images as phone screenshots (portrait, unframed) instead of browser windows. */
+  device?: 'web' | 'mobile';
+  /** Public store listings for mobile apps, linked from the detail page. */
+  stores?: { play?: string; appStore?: string };
   category: ProjectCategory;
   featured?: boolean;
   summary: string;
@@ -244,6 +248,161 @@ const projects: Project[] = [
         bullets: ['Vouchers link to the invoice that bills them', 'Invoices track totals and payment deadlines'],
         image: '/projects/recruitment-document-management-system/vouchers.jpg',
         imageAlt: 'Recruitment system: Turn vouchers into invoices',
+      },
+    ],
+  },
+  {
+    slug: 'lamonada',
+    title: 'Lamonada — Beauty & Wellness App',
+    category: 'Mobile',
+    device: 'mobile',
+    standalone: { org: 'Side project', role: 'Mobile Developer', skills: ['Android', 'iOS'] },
+    stores: {
+      play: 'https://play.google.com/store/apps/details?id=com.app.lamona',
+      appStore: 'https://apps.apple.com/us/app/lamonada/id6776083694',
+    },
+    thumbnail: '/projects/lamonada/thumbnail.jpg',
+    summary:
+      'An iOS and Android app for a skin and aesthetic clinic. Customers browse treatments, buy promotion packages and prepaid cards, and earn loyalty points.',
+    highlights: [
+      'Treatments by category, with search and favourites',
+      'Promotion packages and prepaid cards with usage history',
+      'Loyalty points, push notifications and articles from the clinic',
+    ],
+    steps: [
+      {
+        title: "Open on what's new",
+        description: "The home screen puts the clinic's banners, treatment categories and current packages in one scroll.",
+        bullets: ['Category shortcuts with images', 'Promotion packages with price and number of services', 'Quick links to all services'],
+        image: '/projects/lamonada/home.jpg',
+        imageAlt: 'Lamonada: home screen',
+      },
+      {
+        title: 'Browse and search treatments',
+        description: 'Treatments are grouped by category, with a search bar at the top.',
+        bullets: ['Search by name', 'Sections per category, such as biostimulator and Botox injections', 'Save favourites for later'],
+        image: '/projects/lamonada/browse.jpg',
+        imageAlt: 'Lamonada: browse treatments',
+      },
+      {
+        title: 'Read the treatment details',
+        description: 'Each treatment has its own page with price, photos and a full description in Myanmar.',
+        bullets: ['Price and treatment tag', 'Service details written by the clinic'],
+        image: '/projects/lamonada/service.jpg',
+        imageAlt: 'Lamonada: treatment details',
+      },
+      {
+        title: 'Buy a promotion package',
+        description: 'Packages bundle treatments into one price that is valid for a set period.',
+        bullets: ['Package price and validity, such as 12 months', 'Included services and number of visits'],
+        image: '/projects/lamonada/package.jpg',
+        imageAlt: 'Lamonada: promotion package',
+      },
+      {
+        title: 'Collect points and use prepaid cards',
+        description: "The profile keeps a customer's loyalty points, prepaid cards and purchase history.",
+        bullets: ['Point balance and point history', 'Prepaid cards, purchases and usage', 'Customers can delete their account in the app'],
+        image: '/projects/lamonada/profile.jpg',
+        imageAlt: 'Lamonada: profile with points and prepaid cards',
+      },
+    ],
+  },
+  {
+    slug: 'dkn-pos',
+    title: 'DKN POS — Point of Sale for Small Shops',
+    category: 'Mobile',
+    device: 'mobile',
+    standalone: { org: 'Side project', role: 'Mobile Developer', skills: ['Android'] },
+    stores: { play: 'https://play.google.com/store/apps/details?id=com.dkn.dkn_pos' },
+    thumbnail: '/projects/dkn-pos/thumbnail.jpg',
+    summary:
+      'An Android point-of-sale app for small shops. Ring up sales, print receipts on Bluetooth printers, keep stock right and see daily profit, in Burmese or English.',
+    highlights: [
+      'Retail and wholesale prices, discounts, credit sales and returns',
+      'Burmese receipts on 58 mm and 80 mm Bluetooth thermal printers',
+      'Stock that updates itself, low-stock alerts and real profit reports',
+    ],
+    steps: [
+      {
+        title: 'Ring up a sale',
+        description: 'Pick items, set quantities and see the total update as you go.',
+        bullets: ['Search items by name', 'Several sale prices per item, such as retail and wholesale', 'Switch between Burmese and English from any screen'],
+        image: '/projects/dkn-pos/sell.jpg',
+        imageAlt: 'DKN POS: sell screen',
+      },
+      {
+        title: 'Take payment',
+        description: 'Charge a walk-in or saved customer with the payment method they use.',
+        bullets: ['Cash, KPay or any method the shop adds', 'Discount by percentage or amount', 'Sell on credit and record part payments later'],
+        image: '/projects/dkn-pos/charge.jpg',
+        imageAlt: 'DKN POS: charge sheet',
+      },
+      {
+        title: 'Print a Burmese receipt',
+        description: 'Receipts go to Bluetooth thermal printers as an image, so Burmese item names print as written.',
+        bullets: ['58 mm and 80 mm printers', "Shop name, address, phone and logo on every receipt"],
+        image: '/projects/dkn-pos/receipt.jpg',
+        imageAlt: 'DKN POS: receipt preview',
+      },
+      {
+        title: 'Keep stock right',
+        description: 'Every item shows its stock, purchase price and margin, and stock moves with each sale.',
+        bullets: ['Stock changes on sales, purchases, returns and write-offs', 'Low-stock and out-of-stock alerts', 'Day-by-day stock history per item'],
+        image: '/projects/dkn-pos/items.jpg',
+        imageAlt: 'DKN POS: items with stock and margin',
+      },
+      {
+        title: 'See what the shop earned',
+        description: 'Reports compare sales with cost of goods by day, month or year.',
+        bullets: ['Total sales, purchases and gross profit', 'Each sale keeps the cost at the time, so old figures never change', 'Breakdown per day with voucher count'],
+        image: '/projects/dkn-pos/reports.jpg',
+        imageAlt: 'DKN POS: daily sales report',
+      },
+    ],
+  },
+  {
+    slug: 'heaven-praise',
+    title: 'Heaven Praise — Food Packaging Shop',
+    category: 'Mobile',
+    device: 'mobile',
+    standalone: { org: 'Side project', role: 'Mobile Developer', skills: ['Android'] },
+    stores: { play: 'https://play.google.com/store/apps/details?id=com.rcs_mm.heaven_praise.hp' },
+    thumbnail: '/projects/heaven-praise/thumbnail.jpg',
+    summary:
+      'A shopping app for a food packaging supplier in Mandalay. Customers browse cups, boxes and bags by size and order in bulk with quantity pricing.',
+    highlights: [
+      'Product catalogue by category with sizes and dimensions',
+      'Price tiers by order quantity',
+      'Cart, payment options and in-app chat with the shop',
+    ],
+    steps: [
+      {
+        title: 'Shop by category',
+        description: 'The home screen shows banners and the main product groups.',
+        bullets: ['Paper cups, food boxes, food bags and more', 'Search and cart always at the top'],
+        image: '/projects/heaven-praise/home.jpg',
+        imageAlt: 'Heaven Praise: home screen',
+      },
+      {
+        title: 'Compare sizes',
+        description: 'Each product lists its size and dimensions, so customers pick the right cup or box.',
+        bullets: ['Volume, width, height and length on every item'],
+        image: '/projects/heaven-praise/products.jpg',
+        imageAlt: 'Heaven Praise: product list',
+      },
+      {
+        title: 'Order with quantity pricing',
+        description: 'The product page shows the price for each quantity tier before adding to the cart.',
+        bullets: ['Lower unit price for larger orders', 'Live total as the quantity changes'],
+        image: '/projects/heaven-praise/product.jpg',
+        imageAlt: 'Heaven Praise: product details with price tiers',
+      },
+      {
+        title: 'Reach the shop',
+        description: 'The menu links to products, contact details, chat, company info and payment.',
+        bullets: ['In-app chat with the shop', 'Customer account and payment options'],
+        image: '/projects/heaven-praise/menu.jpg',
+        imageAlt: 'Heaven Praise: menu',
       },
     ],
   },
